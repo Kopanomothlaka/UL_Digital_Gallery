@@ -61,8 +61,7 @@
 
     <div class="row" style="height:550px;">
       <div class="col-md-6 maps" >
-         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11880.492291371422!2d12.4922309!3d41.8902102!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x28f1c82e908503c4!2sColosseo!5e0!3m2!1sit!2sit!4v1524815927977" frameborder="0" style="border:0" allowfullscreen></iframe>
-      </div>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.087938901197!2d29.735326975497316!3d-23.886500173618103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ec6c8c19a5cede1%3A0xcbcd2502e40cea5e!2sUniversity%20of%20Limpopo%2C%20Mankweng!5e0!3m2!1sen!2sza!4v1712949255191!5m2!1sen!2sza" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>      </div>
       <div class="col-md-6">
         <h2 class="text-uppercase mt-3 font-weight-bold text-white">CONTACT</h2>
         <form action="">
@@ -89,7 +88,7 @@
             </div>
             <div class="col-12">
               <div class="form-group">
-                <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Messag" rows="3" required></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Message" rows="3" required></textarea>
               </div>
             </div>
             <div class="col-12">
@@ -110,16 +109,15 @@
         <div class="text-Blue">
         
 
-        <i class="fas fa-phone mt-3"></i> <a href="tel:+">(+39) 123456</a><br>
-        <i class="fas fa-phone mt-3"></i> <a href="tel:+">(+39) 123456</a><br>
-        <i class="fa fa-envelope mt-3"></i> <a href="">info@test.it</a><br>
-        <i class="fas fa-globe mt-3"></i> Piazza del Colosseo, 1, 00184 Roma<br>
-        <i class="fas fa-globe mt-3"></i> Piazza del Colosseo, 1, 00184 Roma<br>
-        <div class="my-4">
-        <a href=""><i class="fab fa-facebook fa-3x pr-4"></i></a>
-        <a href=""><i class="fab fa-linkedin fa-3x"></i></a>
-        </div>
-        </div>
+        <i class="fa fa-phone mt-3"></i> <a href="tel:+" style='color:#C8AB4D' >(+39) 123456</a><br>
+        <i class="fa fa-envelope mt-3"></i> <a href="#" style='color:#C8AB4D' >info@test.it</a><br>
+        <i class="fa fa-facebook mt-3"></i> <a href="#" style='color:#C8AB4D' >University of Limpopo</a><br>
+        <i class="fa fa-instagram mt-3"></i> <a href="#" style='color:#C8AB4D' >University of Limpopo</a><br>
+        <i class="fa fa-twitter mt-3"></i> <a href="#" style='color:#C8AB4D' >University of Limpopo</a><br>
+        <i class="fa fa-youtube mt-3"></i> <a href="#" style='color:#C8AB4D' >University of Limpopo</a><br>
+
+        
+        
       </div>
 
     </div>
