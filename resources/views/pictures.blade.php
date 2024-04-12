@@ -15,6 +15,7 @@
     <script src="/script/script.js"></script> 
 
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/png" href="img/logo.png">
 </head>
 
 <body>
@@ -47,7 +48,7 @@
                         <a class="nav-link text-white" href="pictures">Pictures</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="video">Videos</a>
+                        <a class="nav-link text-white" href="videos">Videos</a>
                     </li>
                   
 
