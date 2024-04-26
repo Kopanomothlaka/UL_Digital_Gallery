@@ -26,6 +26,7 @@
         <div class="container-fluid">
 
                 <img src="/img/logo.png" alt="">
+                
                 <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" style="margin-left: 15px;" placeholder="Search here" aria-label="Search">
       
