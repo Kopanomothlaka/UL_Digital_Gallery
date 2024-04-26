@@ -26,7 +26,10 @@
         <div class="container-fluid">
 
                 <img src="/img/logo.png" alt="">
-                <a class="navbar-brand text-white" href="welcome">Digital Gallery</a>
+                <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" style="margin-left: 15px;" placeholder="Search here" aria-label="Search">
+      
+                </form>
             
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -68,10 +71,7 @@
     <div class="row">
         <div class="col-lg-6 mx-auto" style="margin-top: 25px;">
             
-            <form class="d-flex ms-auto">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+        
             
             <form role="form" class="post-to-timeline" style="margin-top:20px;">
                 <div class="input-group">
@@ -95,6 +95,12 @@
             </div>
         </div>
     </div>
+
+
+   
+
+
+
 </div>
 
 

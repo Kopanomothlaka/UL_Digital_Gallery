@@ -24,6 +24,7 @@
 
                 <img src="/img/logo.png" alt="">
                 <a class="navbar-brand text-white" href="welcome">Digital Gallery</a>
+                
             
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
