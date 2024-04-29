@@ -14,6 +14,7 @@
     <script src="/script/script.js"></script> 
 
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/png" href="img/logo.png">
 </head>
 
 <body>
@@ -21,7 +22,13 @@
     <nav class="navbar navbar-expand-lg py-1.5 sticky-top ">
         <div class="container-fluid">
             <img src="/img/logo.png" alt="">
-            <a class="navbar-brand text-white" href="welcome">Digital Gallery</a>
+                    <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" style="margin-left: 15px;" placeholder="Search here" aria-label="Search">
+      
+                </form>
+
+
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -49,13 +56,34 @@
         </div>
     </nav>
 
+
+
+    
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6 mx-auto" style="margin-top: 25px;">
-                <form class="d-flex ms-auto" enctype="multipart/form-data">
-                    <input class="form-control me-2" type="file" accept="video/*" id="video-upload" onchange="previewVideo(this);" aria-label="Upload video">
-                    <button class="btn btn-outline-success" type="submit">Post Video</button>
-                </form>
+                
+                
+
+
+
+                <form class="d-flex ms-auto shadow p-3 mb-1 bg-white rounded" enctype="multipart/form-data">
+    <input class="form-control me-2" type="file" accept="video/*" id="video-upload" onchange="previewVideo(this);" aria-label="Upload video">
+    <div class="input-group">
+        <input class="form-control" type="text" id="video-caption" placeholder="Enter caption" aria-label="Video caption" style="height: 50px;">
+        <button class="btn btn-outline-success" type="submit">Post Video</button>
+    </div>
+</form>
+</form>
+
+
+
+
+
+
+
+
                 <div class="row" id="video-preview" style="display: none;">
                     <div class="col-lg-12 mx-auto">
                         <video id="preview-video" width="320" height="240" controls>
@@ -82,7 +110,7 @@
     <div class="container posts-content">
     <div class="row">
         <div class="col-lg-7 mx-auto">
-            <div class="card mb-4" style="margin :15px;">
+            <div class="card mb-4 shadow p-3 mb-1 bg-white rounded" style="margin :15px;">
                 <div class="media mb-9" style="display: flex; align-items: center;">
                     <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="d-block ui-w-40 rounded-circle" alt="" style="margin-left:15px;" style="flex-shrink: 0;">
                     <div class="media-body ml-3">
@@ -109,7 +137,7 @@
     <!-- Add more rows and cards for other videos if needed -->
     <div class="row">
         <div class="col-lg-7 mx-auto">
-            <div class="card mb-4" style="margin :15px;">
+            <div class="card mb-4 shadow p-3 mb-1 bg-white rounded" style="margin :15px;">
                 <div class="media mb-9" style="display: flex; align-items: center;">
                     <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="d-block ui-w-40 rounded-circle" alt="" style="margin-left:15px;" style="flex-shrink: 0;">
                     <div class="media-body ml-3">

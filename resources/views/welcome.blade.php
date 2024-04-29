@@ -12,6 +12,7 @@
   
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/png" href="img/logo.png">
 </head>
 
 <body>
@@ -23,6 +24,7 @@
 
                 <img src="/img/logo.png" alt="">
                 <a class="navbar-brand text-white" href="welcome">Digital Gallery</a>
+                
             
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -283,50 +285,6 @@
     </section>
 
     
-
-    </section>
-
-   
-        <div class="container">
-            <div class="row mb-5">
-
-                <div class="col-md-8 mx-auto text-center">
-                    <h6 style="color:#C8AB4D;">Contact</h6>
-                    <h1 style="color:#C8AB4D;">Get in Touch</h1>
-                    <p> Getting in touch with us is easy. Reach out to us through the provided contact details, and let's explore the possibilities together. Your feedback, inquiries, and ideas are the building blocks of our continued journey.
-                    </p>
-                </div>
-            </div>
-
-            <form action="" class="row g-3 justify-content-center">
-                <div class="col-md-5">
-                    <input type="text" class="form-control custom-input" placeholder="Full Name">
-                </div>
-
-                <div class="col-md-5">
-                    <input type="text" class="form-control custom-input" placeholder="Enter Email">
-                </div>
-
-                <div class="col-md-10">
-                    <input type="text" class="form-control custom-input" placeholder="Enter Subject">
-                </div>
-
-                <div class="col-md-10">
-                    <textarea name="" id="" cols="30" rows="5" class="form-control custom-input"
-                        placeholder="Enter Message"></textarea>
-                </div>
-                <div class="col-md-10 d-grid">
-                    <button class="btn btn-primary">CONTACT</button>
-                </div>
-
-
-            </form>
-
-        </div>
-
-    </section>
-
-
 
 
 

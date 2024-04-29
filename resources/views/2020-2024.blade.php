@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="/css/2020.css">
+    <link rel="icon" type="image/png" href="img/logo.png">
     <title>2020-2024</title>
 </head>
 <body>

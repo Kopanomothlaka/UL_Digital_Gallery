@@ -15,6 +15,7 @@
     <script src="/script/script.js"></script> 
 
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/png" href="img/logo.png">
 </head>
 
 <body>
@@ -25,7 +26,11 @@
         <div class="container-fluid">
 
                 <img src="/img/logo.png" alt="">
-                <a class="navbar-brand text-white" href="welcome">Digital Gallery</a>
+                
+                <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" style="margin-left: 15px;" placeholder="Search here" aria-label="Search">
+      
+                </form>
             
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -47,7 +52,7 @@
                         <a class="nav-link text-white" href="pictures">Pictures</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="video">Videos</a>
+                        <a class="nav-link text-white" href="videos">Videos</a>
                     </li>
                   
 
@@ -67,16 +72,13 @@
     <div class="row">
         <div class="col-lg-6 mx-auto" style="margin-top: 25px;">
             
-            <form class="d-flex ms-auto">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+        
             
-            <form role="form" class="post-to-timeline" style="margin-top:20px;">
+            <form role="form" class="post-to-timeline shadow p-3 mb-3 bg-white rounded" style="margin-top:20px;">
                 <div class="input-group">
                     <textarea class="form-control" style="height: 70px; margin-bottom: 10px; resize: none;" placeholder="What's on your mind..."></textarea>
-                    <div class="input-group-append">
-                        <label for="image-upload" class="btn btn-sm btn-default">
+                    <div class="input-group-append p-3">
+                        <label for="image-upload" class="btn btn-sm btn-default ">
                             <i class="fa fa-camera" style="color: white;"></i>
                             <input type="file" id="image-upload" style="display: none;" onchange="previewImage(this);">
                         </label>
@@ -94,6 +96,12 @@
             </div>
         </div>
     </div>
+
+
+   
+
+
+
 </div>
 
 
@@ -126,7 +134,7 @@
 
     <div class="row">
         <div class="col-lg-7 mx-auto" >
-            <div class="card mb-4">
+            <div class="card mb-4 shadow p-3 mb-1 bg-white rounded">
 
             <div class="media mb-9" style="display: flex; align-items: center;">
                 <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="d-block ui-w-40 rounded-circle" alt="" style="margin-left:15px;" style="flex-shrink: 0;">
@@ -158,7 +166,7 @@
     </div>
     <div class="row">
         <div class="col-lg-7 mx-auto" >
-            <div class="card mb-4">
+            <div class="card mb-4 shadow p-3 mb-1 bg-white rounded">
 
             <div class="media mb-9" style="display: flex; align-items: center;">
                 <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="d-block ui-w-40 rounded-circle" alt="" style="margin-left:15px;" style="flex-shrink: 0;">
