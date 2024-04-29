@@ -56,6 +56,10 @@
         </div>
     </nav>
 
+
+
+    
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6 mx-auto" style="margin-top: 25px;">
@@ -64,7 +68,7 @@
 
 
 
-                <form class="d-flex ms-auto" enctype="multipart/form-data">
+                <form class="d-flex ms-auto shadow p-3 mb-1 bg-white rounded" enctype="multipart/form-data">
     <input class="form-control me-2" type="file" accept="video/*" id="video-upload" onchange="previewVideo(this);" aria-label="Upload video">
     <div class="input-group">
         <input class="form-control" type="text" id="video-caption" placeholder="Enter caption" aria-label="Video caption" style="height: 50px;">
@@ -106,7 +110,7 @@
     <div class="container posts-content">
     <div class="row">
         <div class="col-lg-7 mx-auto">
-            <div class="card mb-4" style="margin :15px;">
+            <div class="card mb-4 shadow p-3 mb-1 bg-white rounded" style="margin :15px;">
                 <div class="media mb-9" style="display: flex; align-items: center;">
                     <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="d-block ui-w-40 rounded-circle" alt="" style="margin-left:15px;" style="flex-shrink: 0;">
                     <div class="media-body ml-3">
@@ -133,7 +137,7 @@
     <!-- Add more rows and cards for other videos if needed -->
     <div class="row">
         <div class="col-lg-7 mx-auto">
-            <div class="card mb-4" style="margin :15px;">
+            <div class="card mb-4 shadow p-3 mb-1 bg-white rounded" style="margin :15px;">
                 <div class="media mb-9" style="display: flex; align-items: center;">
                     <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="d-block ui-w-40 rounded-circle" alt="" style="margin-left:15px;" style="flex-shrink: 0;">
                     <div class="media-body ml-3">

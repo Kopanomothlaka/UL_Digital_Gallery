@@ -74,11 +74,11 @@
             
         
             
-            <form role="form" class="post-to-timeline" style="margin-top:20px;">
+            <form role="form" class="post-to-timeline shadow p-3 mb-3 bg-white rounded" style="margin-top:20px;">
                 <div class="input-group">
                     <textarea class="form-control" style="height: 70px; margin-bottom: 10px; resize: none;" placeholder="What's on your mind..."></textarea>
-                    <div class="input-group-append">
-                        <label for="image-upload" class="btn btn-sm btn-default">
+                    <div class="input-group-append p-3">
+                        <label for="image-upload" class="btn btn-sm btn-default ">
                             <i class="fa fa-camera" style="color: white;"></i>
                             <input type="file" id="image-upload" style="display: none;" onchange="previewImage(this);">
                         </label>
@@ -134,7 +134,7 @@
 
     <div class="row">
         <div class="col-lg-7 mx-auto" >
-            <div class="card mb-4">
+            <div class="card mb-4 shadow p-3 mb-1 bg-white rounded">
 
             <div class="media mb-9" style="display: flex; align-items: center;">
                 <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="d-block ui-w-40 rounded-circle" alt="" style="margin-left:15px;" style="flex-shrink: 0;">
@@ -166,7 +166,7 @@
     </div>
     <div class="row">
         <div class="col-lg-7 mx-auto" >
-            <div class="card mb-4">
+            <div class="card mb-4 shadow p-3 mb-1 bg-white rounded">
 
             <div class="media mb-9" style="display: flex; align-items: center;">
                 <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="d-block ui-w-40 rounded-circle" alt="" style="margin-left:15px;" style="flex-shrink: 0;">
