@@ -22,7 +22,10 @@
     <nav class="navbar navbar-expand-lg py-1.5 sticky-top ">
         <div class="container-fluid">
 
-                <img src="/img/logo.png" alt="">
+        <a href="welcome">
+            <img src="/img/logo.png" alt="Logo">
+        </a>
+
                 <a class="navbar-brand text-white" href="welcome">Digital Gallery</a>
                 
             
@@ -56,8 +59,12 @@
 
                 </ul>
 
+                <div class="pl-3">
+                <a href="login" class="btn btn-primary p-2 ">Log in</a>
+
+                </div>
+
                 
-                <a href="login" class="btn btn-primary">Log in</a>
             </div>
         </div>
     </nav>

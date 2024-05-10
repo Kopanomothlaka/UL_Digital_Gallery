@@ -65,7 +65,7 @@
     <div class="hero  N  vh-100 d-flex align-items-center" id="home">
     <div class="container">
 
-   <section>
+    <section>
       <div class="container mt-5 pt-5">
         <div class="row">
           <div class="col-12 col-sm-7 col-md-5 m-auto">
@@ -74,25 +74,24 @@
               <div class="d-flex justify-content-center">
               <img src="/img/logo.png" alt="" class="img-fluid">
             </div>
-                <h1 class="text-center">Log in</h1>
+                <h1 class="text-center">Reset Password</h1>
                 <p class="text-center">Digital <span style="color:#0E6545;">Gallery</span></p>
                 <form action="">
 
                 <label for="username">Email</label>
                   <input type="email" name="" id="" class="form-control rounded-pill my-1 py-2 custom-input"  />
 
-                  <label for="username">Password</label>
+                  <label for="username">New Password</label>
+                  <input type="password" name="" id="" class="form-control rounded-pill my-1 py-2 custom-input"  />
+                  <label for="username">Confirm Password</label>
                   <input type="password" name="" id="" class="form-control rounded-pill my-1 py-2 custom-input"  />
 
                   
 
                   <div class="text-center mt-3">
-                  <div class="d-inline-block">
-                            <p class="d-inline">Already have an account?</p>
-                            <a href="createAccount" class="nav-link d-inline m">create account</a>
-                        </div>
-                        <button class="btn btn-primary w-100 mt-3">Login</button>
-                        <a href="ResetPass" class="nav-link d-inline m">Reset Password</a>
+                  
+                        <button class="btn btn-primary w-100 mt-3">RESET</button>
+                        <a href="login" class="nav-link d-inline m">LOG IN</a>
                        
                     </div>
                 </form>

@@ -41,3 +41,6 @@ Route::get('/2020-2024', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
+Route::get('/ResetPass', function () {
+    return view('ResetPass');
+});
