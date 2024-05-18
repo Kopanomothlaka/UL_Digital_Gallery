@@ -1,73 +1,9 @@
-<!doctype html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>UL Digital Gallery</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="icon" type="image/png" href="img/logo.png">
-</head>
+@extends('layout')
 
-<body>
+@section('title' ,'Home')
 
-   
-
-    <nav class="navbar navbar-expand-lg py-1.5 sticky-top ">
-        <div class="container-fluid">
-
-        <a href="welcome">
-            <img src="/img/logo.png" alt="Logo">
-        </a>
-
-                <a class="navbar-brand text-white" href="welcome">Digital Gallery</a>
-                
-            
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-
-            <div class="collapse navbar-collapse" id="navbarNav" >
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item ">
-                        <a class="nav-link text-white " href="welcome">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#news">News</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#gallery">Pictures</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#videos">Videos</a>
-                    </li>
-                  
-
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="contact">Contact</a>
-                    </li>
-
-                </ul>
-
-                <div class="pl-3">
-                <a href="login" class="btn btn-primary p-2 ">Log in</a>
-
-                </div>
-
-                
-            </div>
-        </div>
-    </nav>
+@section('content')
 
 
     <div class="hero vh-100 d-flex align-items-center" id="home">
@@ -77,7 +13,7 @@
                     <h1 class="display-6 text-white ">University of Limpopo</h1>
                     <h4 class="display-1 text-white bold ">
                       <span style="color:#C8AB4D;">Digital</span> Gallery                   </h4>
-                    
+
 
 
                     <p class="text-white">
@@ -103,17 +39,17 @@
                 </div>
             </div>
 
-            
+
          <div class="row g-1">
          <div class="row g-4">
                 <h4 class="mt-5 mb-20" style="color:#C8AB4D; margin-bottom: 0;">Recent News</h4>
-                
-                
-            </div> 
 
 
-                <div class="col-20 col-md-4"> 
-                
+            </div>
+
+
+                <div class="col-20 col-md-4">
+
                     <div class="service card-effect">
 
                     <img class="card-img-top" src="/img/strike.png" alt="Card image cap"  style="height: 300px;">
@@ -149,13 +85,13 @@
                     </div>
 
                 </div>
-                
 
 
-                
-                
-                
-               
+
+
+
+
+
             </div>
         </div>
 
@@ -168,8 +104,8 @@
                 <div class="col-md-8 mx-auto text-center">
                     <h6 style="color:#C8AB4D;">Gallery</h6>
                     <h1 style="color:#C8AB4D;">Our Gallery</h1>
-                    <p> Step into the captivating world of the University of Limpopo through our gallery, where each image is a window into our vibrant campus life, academic excellence, and cultural diversity. From stunning landscapes that reflect the natural beauty of our surroundings to engaging snapshots of student activities, events, and facilities, our gallery showcases the essence of our university experience.<span><a href="pictures" style="text-decoration: underline; color:blue;">View all pictures</a></span> 
-                   
+                    <p> Step into the captivating world of the University of Limpopo through our gallery, where each image is a window into our vibrant campus life, academic excellence, and cultural diversity. From stunning landscapes that reflect the natural beauty of our surroundings to engaging snapshots of student activities, events, and facilities, our gallery showcases the essence of our university experience.<span><a href="pictures" style="text-decoration: underline; color:blue;">View all pictures</a></span>
+
                 </p>
                 </div>
 
@@ -179,11 +115,11 @@
 
             <div class="row g-1">
                 <h4 class="mt-5 mb-20" style="color:#C8AB4D; margin-bottom: 0;">Recent Pictures</h4>
-            
-        
-            </div> 
+
+
+            </div>
                 <div class="col-1g-4 col-sm-6">
-                    
+
                     <div class="gallery">
                     <figure class="figure">
                 <img src="/img/bg_image.png" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
@@ -193,7 +129,7 @@
 
                     </div>
 
-                   
+
                 </div>
                 <div class="col-1g-4 col-sm-6">
                     <div class="gallery">
@@ -226,13 +162,13 @@
 
 
                     </div>
-                    
+
 
                 </div>
 
-                
+
             </div>
-            
+
 
         </div>
 
@@ -245,18 +181,18 @@
                 <div class="col-md-8 mx-auto text-center">
                     <h6 style="color:#C8AB4D;">Videos</h6>
                     <h1 style="color:#C8AB4D;">Our Videos</h1>
-                    <p> Explore the vibrant campus life and academic excellence at the University of Limpopo through our captivating videos. From insightful lectures and groundbreaking research to cultural events and student activities, our videos showcase the diverse and dynamic spirit of our university community. Join us on a visual journey that highlights our commitment to education, innovation, and the holistic development of our students. <span><a href="videos" style="text-decoration: underline; color:blue;">see all videos</a></span> 
+                    <p> Explore the vibrant campus life and academic excellence at the University of Limpopo through our captivating videos. From insightful lectures and groundbreaking research to cultural events and student activities, our videos showcase the diverse and dynamic spirit of our university community. Join us on a visual journey that highlights our commitment to education, innovation, and the holistic development of our students. <span><a href="videos" style="text-decoration: underline; color:blue;">see all videos</a></span>
                     </p>
                 </div>
 
 
             </div>
-            
+
 
             <div class="row g-3">
                 <div class="col-1g-4 col-sm-6">
                 <div class="gallery">
-                    
+
                 <iframe width="949" height="534" src="https://www.youtube.com/embed/W7y5HKABUQg" title="Campus View | #ULEvents2024" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
                 </div>
@@ -284,29 +220,29 @@
                     <iframe width="949" height="534" src="https://www.youtube.com/embed/szZxRmO6IFo" title="UL STUDENT ACCOMMODATION: ON-CAMPUS M +V side Residences ✨️turfloop campus 2024✨️" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                    </div>
 
                 </div>
-                
+
             </div>
 
         </div>
 
     </section>
 
-    
+
 
 
 
 
 <footer>
-    
+
     <div class="footer-bottom py-3">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
                     @ 2023 copyright all right reserved
-                    
+
                 </div>
-            
-                    
+
+
                 </div>
             </div>
         </div>
@@ -315,15 +251,17 @@
 
 </footer>
 
-
-
-    
-
+@endsection
 
 
 
 
 
-</body>
 
-</html>
+
+
+
+
+
+
+

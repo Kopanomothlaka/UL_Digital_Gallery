@@ -9,9 +9,9 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  
+
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <script src="/script/script.js"></script> 
+    <script src="/script/script.js"></script>
 
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/png" href="img/logo.png">
@@ -29,31 +29,60 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item ">
-                        <a class="nav-link text-white " href="welcome">Home</a>
-                    </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="news">News</a>
+                        <a class="nav-link text-white" href="welcome">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="pictures">Pictures</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="videos">Videos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="login">Contact</a>
-                    </li>
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="news">News</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="pictures">Pictures</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="videos">Videos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="contact">Contact</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i >
+                                    <img src="/img/profileicon.png" alt="icon" style="height: 35px;width: 35px;align-content: center">
+
+                                </i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">Profile</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
+                            </ul>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="news">News</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="pictures">Pictures</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="videos">Videos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="contact">Contact</a>
+                        </li>
                 </ul>
-                <a href="login" class="btn btn-primary">Log in</a>
+                <a href="log" class="btn btn-primary">Log in</a>
+                @endauth
+                </ul>
             </div>
         </div>
     </nav>
 
-    
 
-     
-    
+
+
+
 
 
 
@@ -108,7 +137,7 @@
           </div>
         </form>
         <div class="text-Blue">
-        
+
 
         <i class="fa fa-phone mt-3"></i> <a href="tel:+" style='color:#C8AB4D' >(+39) 123456</a><br>
         <i class="fa fa-envelope mt-3"></i> <a href="#" style='color:#C8AB4D' >info@test.it</a><br>
@@ -117,8 +146,8 @@
         <i class="fa fa-twitter mt-3"></i> <a href="#" style='color:#C8AB4D' >University of Limpopo</a><br>
         <i class="fa fa-youtube mt-3"></i> <a href="#" style='color:#C8AB4D' >University of Limpopo</a><br>
 
-        
-        
+
+
       </div>
 
     </div>

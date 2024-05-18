@@ -3,16 +3,16 @@
 
 <head>
     <meta charset="utf-8">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>UL Digital Gallery</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  
+
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <script src="/script/script.js"></script> 
+    <script src="/script/script.js"></script>
 
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/png" href="img/logo.png">
@@ -20,7 +20,7 @@
 
 <body>
 
-   
+
 
     <nav class="navbar navbar-expand-lg py-1.5 sticky-top ">
         <div class="container-fluid">
@@ -29,12 +29,12 @@
                 <img src="/img/logo.png" alt="Logo">
             </a>
 
-                
+
                 <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" style="margin-left: 15px;" placeholder="Search here" aria-label="Search">
-      
+
                 </form>
-            
+
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,41 +42,64 @@
             </button>
 
 
-            <div class="collapse navbar-collapse" id="navbarNav" >
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item ">
-                        <a class="nav-link text-white " href="welcome">Home</a>
-                    </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="news">News</a>
+                        <a class="nav-link text-white" href="welcome">Home</a>
                     </li>
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="news">News</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="pictures">Pictures</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="videos">Videos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="contact">Contact</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i >
+                                    <img src="/img/profileicon.png" alt="icon" style="height: 35px;width: 35px;align-content: center">
 
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="pictures">Pictures</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="videos">Videos</a>
-                    </li>
-                  
-
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="contact">Contact</a>
-                    </li>
-
+                                </i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">Profile</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
+                            </ul>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="news">News</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="pictures">Pictures</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="videos">Videos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="contact">Contact</a>
+                        </li>
                 </ul>
-
-                
-                <a href="login" class="btn btn-primary">Log in</a>
+                <a href="log" class="btn btn-primary">Log in</a>
+                @endauth
+                </ul>
             </div>
         </div>
     </nav>
     <div class="container-fluid">
-    
+
     <div class="row">
         <div class="col-lg-6 mx-auto" style="margin-top: 25px;">
-            
-        
-            
+
+
+
             <form role="form" class="post-to-timeline shadow p-3 mb-3 bg-white rounded" style="margin-top:20px;">
                 <div class="input-group">
                     <textarea class="form-control" style="height: 70px; margin-bottom: 10px; resize: none;" placeholder="What's on your mind..."></textarea>
@@ -101,7 +124,7 @@
     </div>
 
 
-   
+
 
 
 
@@ -126,13 +149,13 @@
     }
 </script>
 
-     
-     
 
 
-    
+
+
+
     <div class="container posts-content">
-   
+
 
 
     <div class="row">
@@ -150,9 +173,9 @@
                     </p>
             <img src="/img/bg_image.png" class="img-fluid" style="width: 100%;" height="600px" alt="">
                 <div class="card-body"  >
-                                   
 
-                    
+
+
                 </div>
 
 
@@ -182,9 +205,9 @@
                     </p>
             <img src="/img/bg_image.png" class="img-fluid" style="width: 100%;" height="600px" alt="">
                 <div class="card-body"  >
-                                   
 
-                    
+
+
                 </div>
 
 
@@ -214,9 +237,9 @@
                     </p>
             <img src="/img/bg_image.png" class="img-fluid" style="width: 100%;" height="600px" alt="">
                 <div class="card-body"  >
-                                   
 
-                    
+
+
                 </div>
 
 
@@ -246,9 +269,9 @@
                     </p>
             <img src="/img/bg_image.png" class="img-fluid" style="width: 100%;" height="600px" alt="">
                 <div class="card-body"  >
-                                   
 
-                    
+
+
                 </div>
 
 
@@ -263,20 +286,20 @@
             </div>
         </div>
     </div>
-    
-     
+
+
 </div>
-      
-    </section>   
 
-   
-    
+    </section>
 
 
 
 
 
-    <script src="/script/script.js"></script> 
+
+
+
+    <script src="/script/script.js"></script>
 
 </body>
 

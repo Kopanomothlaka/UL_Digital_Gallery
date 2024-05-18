@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthManager;
+use App\Http\Controllers\ForgetPasswordManager;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,16 +19,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/welcome', function () {
     return view('welcome');
-});
+})->name('home');
+Route::get('/UserHome', function () {
+    return view('UserHome');
+})->name('UserHome');
 
-Route::get('/login', function () {
-    return view('login');
-});
-Route::get('/createAccount', function () {
-    return view('createAccount');
-});
+
 Route::get('/news', function () {
     return view('news');
 });
@@ -41,6 +43,36 @@ Route::get('/2020-2024', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
-Route::get('/ResetPass', function () {
-    return view('ResetPass');
+
+Route::get('/admin/main', function () {
+    return view('/admin/main');
 });
+
+
+Route::get('/log', [AuthManager::class, 'log'])->name('log');
+Route::post('/log', [AuthManager::class, 'logPost'])->name('log.post');
+
+
+Route::get('/register', [AuthManager::class, 'register'])->name('register');
+Route::post('/register', [AuthManager::class, 'registerPost'])->name('register.post');
+
+
+Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/profile', function () {
+        return "eyy";
+    });
+
+});
+
+Route::get('/forget-password', [ForgetPasswordManager::class, "forgetPassword"])->name('forget.password');
+Route::post('/forget-password', [ForgetPasswordManager::class, "forgetPasswordPost"])->name('forget.password.post');
+
+Route::get('/reset-password/{token}', [ForgetPasswordManager::class, "resetPassword"])->name('reset.password');
+Route::post('/reset-password', [ForgetPasswordManager::class, "resetPasswordPost"])->name('reset.password.post');
+
+
+
+
+
