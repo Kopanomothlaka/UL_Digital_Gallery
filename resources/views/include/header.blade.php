@@ -29,16 +29,25 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="contact">Contact</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Notifications</a>
+                    </li>
+
+
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i >
-                                <img src="/img/profileicon.png" alt="icon" style="height: 35px;width: 35px;align-content: center">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i>
+                                <img src="/img/profileicon.png" alt="icon"
+                                     style="height: 35px;width: 35px;align-content: center">
 
                             </i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="profile">Profile</a></li>
-                            <li><hr class="dropdown-divider" /></li>
+                            <li>
+                                <hr class="dropdown-divider"/>
+                            </li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
                         </ul>
                     </li>

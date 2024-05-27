@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\ForgetPasswordManager;
+use App\Http\Controllers\TimelineController;
 
 
 /*
@@ -31,9 +32,8 @@ Route::get('/UserHome', function () {
 Route::get('/news', function () {
     return view('news');
 });
-Route::get('/pictures', function () {
-    return view('pictures');
-});
+Route::get('/pictures', [TimelineController::class, 'showPictures'])->name('pictures');
+
 Route::get('/videos', function () {
     return view('videos');
 });
@@ -42,10 +42,6 @@ Route::get('/2020-2024', function () {
 });
 Route::get('/contact', function () {
     return view('contact');
-});
-
-Route::get('/admin/main', function () {
-    return view('/admin/main');
 });
 
 
@@ -73,6 +69,21 @@ Route::get('/reset-password/{token}', [ForgetPasswordManager::class, "resetPassw
 Route::post('/reset-password', [ForgetPasswordManager::class, "resetPasswordPost"])->name('reset.password.post');
 
 
+// routes/web.php
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+
+    Route::get('/users', function () {
+        return view('admin.users');
+    })->name('users');
+
+
+});
+
+
+Route::post('/post-to-timeline', [TimelineController::class, 'postToTimeline'])->name('post.timeline');
 
 
 

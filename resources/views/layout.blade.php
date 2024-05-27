@@ -26,7 +26,8 @@
             z-index: 2;
 
         }
-        .content-section{
+
+        .content-section {
             content: "";
             width: 100%;
             height: 100%;
@@ -42,14 +43,12 @@
 </head>
 
 <body>
-  @include('include.header')
+@include('include.header')
 
-  <div class="content-section">
+<div class="content-section">
     @yield('content')
 
-  </div>
-
-
+</div>
 
 
 </body>

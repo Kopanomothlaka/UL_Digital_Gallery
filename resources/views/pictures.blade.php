@@ -18,121 +18,152 @@
     <link rel="icon" type="image/png" href="img/logo.png">
 </head>
 
+<style>
+    #imagePreview {
+        max-width: 100%;
+        max-height: 400px;
+        border: 1px solid #ccc;
+        margin-top: 10px;
+    }
+
+</style>
+
 <body>
 
 
-
-    <nav class="navbar navbar-expand-lg py-1.5 sticky-top ">
-        <div class="container-fluid">
+<nav class="navbar navbar-expand-lg py-1.5 sticky-top ">
+    <div class="container-fluid">
 
         <a href="welcome">
-                <img src="/img/logo.png" alt="Logo">
-            </a>
+            <img src="/img/logo.png" alt="Logo">
+        </a>
 
 
-                <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" style="margin-left: 15px;" placeholder="Search here" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" style="margin-left: 15px;" placeholder="Search here"
+                   aria-label="Search">
 
-                </form>
+        </form>
 
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="welcome">Home</a>
+                </li>
+                @auth
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="welcome">Home</a>
+                        <a class="nav-link text-white" href="news">News</a>
                     </li>
-                    @auth
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="news">News</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="pictures">Pictures</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="videos">Videos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="contact">Contact</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i >
-                                    <img src="/img/profileicon.png" alt="icon" style="height: 35px;width: 35px;align-content: center">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="pictures">Pictures</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="videos">Videos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="contact">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i>
+                                <img src="/img/profileicon.png" alt="icon"
+                                     style="height: 35px;width: 35px;align-content: center">
 
-                                </i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">Profile</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
-                            </ul>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="news">News</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="pictures">Pictures</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="videos">Videos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="contact">Contact</a>
-                        </li>
-                </ul>
-                <a href="log" class="btn btn-primary">Log in</a>
-                @endauth
-                </ul>
-            </div>
+                            </i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider"/>
+                            </li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="news">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="pictures">Pictures</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="videos">Videos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="contact">Contact</a>
+                    </li>
+            </ul>
+            <a href="log" class="btn btn-primary">Log in</a>
+            @endauth
+            </ul>
         </div>
-    </nav>
-    <div class="container-fluid">
+    </div>
+</nav>
+
+
+<div class="container-fluid">
 
     <div class="row">
         <div class="col-lg-6 mx-auto" style="margin-top: 25px;">
 
 
-
-            <form role="form" class="post-to-timeline shadow p-3 mb-3 bg-white rounded" style="margin-top:20px;">
+            <form action="{{ route('post.timeline') }}" method="POST" enctype="multipart/form-data"
+                  class="post-to-timeline shadow p-3 mb-3 bg-white rounded" style="margin-top: 20px;">
+                @csrf
                 <div class="input-group">
-                    <textarea class="form-control" style="height: 70px; margin-bottom: 10px; resize: none;" placeholder="What's on your mind..."></textarea>
+                    <textarea class="form-control" style="height: 70px; margin-bottom: 10px; resize: none;" name="text"
+                              placeholder="What's on your mind..."></textarea>
                     <div class="input-group-append p-3">
-                        <label for="image-upload" class="btn btn-sm btn-default ">
+                        <label for="image-upload" class="btn btn-sm btn-default">
                             <i class="fa fa-camera" style="color: white;"></i>
-                            <input type="file" id="image-upload" style="display: none;" onchange="previewImage(this);">
+                            <input type="file" id="image-upload" name="image" style="display: none;"
+                                   onchange="previewImage(this)">
                         </label>
-                        <button type="submit" class="btn btn-primary">Post</button>
+                        <button type=" submit" class="btn btn-primary">Post</button>
                     </div>
                 </div>
-                <p id="file-name"></p> <!-- Element to display the file name -->
+
             </form>
-
-
+            <div>
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+            </div>
             <div class="row" id="image-preview" style="display: none;">
-               <div class="col-lg-2 mx-auto">
-                   <img id="preview-img" src="#" alt="Preview Image" style="max-width: 100%; max-height: auto;">
-               </div>
+                <div class="col-lg-2 mx-auto">
+                    <img id="preview-img" src="#" alt="Preview Image" style="max-width: 100%;max-height: 2000px;">
+                </div>
             </div>
         </div>
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="modal-image" src="#" alt="Preview Image" style="max-width: 100%; max-height: 90vh;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
-
-
-
-
 
 
 </div>
-
-
-
-    </div>
 </div>
 
 <script>
@@ -143,163 +174,77 @@
         reader.onload = function (e) {
             document.getElementById('image-preview').style.display = 'block';
             document.getElementById('preview-img').src = e.target.result;
+
+            // Set the modal image source
+            document.getElementById('modal-image').src = e.target.result;
+
+            // Open the modal
+            var modal = new bootstrap.Modal(document.getElementById('imageModal'));
+            modal.show();
         };
 
         reader.readAsDataURL(file);
     }
+
+
 </script>
 
 
+<div class="container posts-content">
 
 
+    @foreach($posts as $post)
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+                <div class="card mb-4 shadow p-3 mb-1 bg-white rounded">
+
+                    <div class="media mb-9" style="display: flex; align-items: center;">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                             class="d-block ui-w-40 rounded-circle"
+                             alt="" style="margin-left:15px;" style="flex-shrink: 0;">
 
 
-    <div class="container posts-content">
-
-
-
-    <div class="row">
-        <div class="col-lg-7 mx-auto" >
-            <div class="card mb-4 shadow p-3 mb-1 bg-white rounded">
-
-            <div class="media mb-9" style="display: flex; align-items: center;">
-                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="d-block ui-w-40 rounded-circle" alt="" style="margin-left:15px;" style="flex-shrink: 0;">
-                <div class="media-body ml-3">
-                     <h6 style="margin-left:15px;"> Kenneth Frazier</h6>
-                    <div class="text-muted small" style="margin-left:15px;"> <h7>3 days ago</h7></div>
-                </div>
-            </div>
-            <p style="margin-left:15px;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus commodo bibendum.
+                        <div class="media-body ml-3">
+                            <h6 style="margin-left:15px;"> {{ $post->user->name }}</h6>
+                            <div class="text-muted small" style="margin-left:15px;">
+                                <h7>{{ $post->created_at->diffForHumans() }}</h7>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="margin-left:15px;"> {{ $post->text }}
                     </p>
-            <img src="/img/bg_image.png" class="img-fluid" style="width: 100%;" height="600px" alt="">
-                <div class="card-body"  >
+                    <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid" style="width: 100%;"
+                         height="600px" alt="">
 
 
+                    <div class="card-body">
 
-                </div>
+
+                    </div>
 
 
-                <div class="card-footer">
-                    <a href="javascript:void(0)" class="d-inline-block text-muted">
-                        <strong>123</strong> <small class="align-middle">Likes</small>
-                    </a>
-                         <a href="javascript:void(0)" class="d-inline-block text-muted ml-3" style="margin-left:10px; color:blue;" >
-                        <small class="align-middle">Share</small>
-                    </a>
+                    <div class="card-footer">
+                        <a href="javascript:void(0)" class="d-inline-block text-muted">
+                            <strong>123</strong> <small class="align-middle">Likes</small>
+                        </a>
+                        <a href="javascript:void(0)" class="d-inline-block text-muted ml-3"
+                           style="margin-left:10px; color:blue;">
+                            <small class="align-middle">Share</small>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-7 mx-auto" >
-            <div class="card mb-4 shadow p-3 mb-1 bg-white rounded">
 
-            <div class="media mb-9" style="display: flex; align-items: center;">
-                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="d-block ui-w-40 rounded-circle" alt="" style="margin-left:15px;" style="flex-shrink: 0;">
-                <div class="media-body ml-3">
-                     <h6 style="margin-left:15px;"> Kenneth Frazier</h6>
-                    <div class="text-muted small" style="margin-left:15px;"> <h7>3 days ago</h7></div>
-                </div>
-            </div>
-            <p style="margin-left:15px;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus commodo bibendum.
-                    </p>
-            <img src="/img/bg_image.png" class="img-fluid" style="width: 100%;" height="600px" alt="">
-                <div class="card-body"  >
-
-
-
-                </div>
-
-
-                <div class="card-footer">
-                    <a href="javascript:void(0)" class="d-inline-block text-muted">
-                        <strong>123</strong> <small class="align-middle">Likes</small>
-                    </a>
-                         <a href="javascript:void(0)" class="d-inline-block text-muted ml-3" style="margin-left:10px; color:blue;" >
-                        <small class="align-middle">Share</small>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-7 mx-auto" >
-            <div class="card mb-4">
-
-            <div class="media mb-9" style="display: flex; align-items: center;">
-                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="d-block ui-w-40 rounded-circle" alt="" style="margin-left:15px;" style="flex-shrink: 0;">
-                <div class="media-body ml-3">
-                     <h6 style="margin-left:15px;"> Kenneth Frazier</h6>
-                    <div class="text-muted small" style="margin-left:15px;"> <h7>3 days ago</h7></div>
-                </div>
-            </div>
-            <p style="margin-left:15px;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus commodo bibendum.
-                    </p>
-            <img src="/img/bg_image.png" class="img-fluid" style="width: 100%;" height="600px" alt="">
-                <div class="card-body"  >
-
-
-
-                </div>
-
-
-                <div class="card-footer">
-                    <a href="javascript:void(0)" class="d-inline-block text-muted">
-                        <strong>123</strong> <small class="align-middle">Likes</small>
-                    </a>
-                         <a href="javascript:void(0)" class="d-inline-block text-muted ml-3" style="margin-left:10px; color:blue;" >
-                        <small class="align-middle">Share</small>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-7 mx-auto" >
-            <div class="card mb-4">
-
-            <div class="media mb-9" style="display: flex; align-items: center;">
-                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="d-block ui-w-40 rounded-circle" alt="" style="margin-left:15px;" style="flex-shrink: 0;">
-                <div class="media-body ml-3">
-                     <h6 style="margin-left:15px;"> Kenneth Frazier</h6>
-                    <div class="text-muted small" style="margin-left:15px;"> <h7>3 days ago</h7></div>
-                </div>
-            </div>
-            <p style="margin-left:15px;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus commodo bibendum.
-                    </p>
-            <img src="/img/bg_image.png" class="img-fluid" style="width: 100%;" height="600px" alt="">
-                <div class="card-body"  >
-
-
-
-                </div>
-
-
-                <div class="card-footer">
-                    <a href="javascript:void(0)" class="d-inline-block text-muted">
-                        <strong>123</strong> <small class="align-middle">Likes</small>
-                    </a>
-                         <a href="javascript:void(0)" class="d-inline-block text-muted ml-3" style="margin-left:10px; color:blue;" >
-                        <small class="align-middle">Share</small>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+    @endforeach
 
 
 </div>
 
-    </section>
+</section>
 
 
-
-
-
-
-
-
-    <script src="/script/script.js"></script>
+<script src="/script/script.js"></script>
 
 </body>
 
