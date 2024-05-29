@@ -15,6 +15,7 @@ class TimelineController extends Controller
             'image' => 'required|image|max:50000', // Adjust max file size as needed
         ]);
 
+
         $imagePath = $request->file('image')->store('images', 'public');
 
         $post = new Post;
@@ -22,6 +23,7 @@ class TimelineController extends Controller
         $post->text = $request->text;
         $post->image_path = $imagePath;
         $post->save();
+
 
         return redirect()->back()->with('success', 'Post created successfully.');
     }
@@ -32,6 +34,14 @@ class TimelineController extends Controller
         $posts = Post::orderByDesc('created_at')->get();
 
         return view('pictures', ['posts' => $posts]);
+    }
+
+    public function delete(Request $request, $id)
+    {
+        $post = Post::findOrFail($id);
+        $post->delete();
+
+        return redirect()->back()->with('success', 'Post deleted successfully!');
     }
 
 

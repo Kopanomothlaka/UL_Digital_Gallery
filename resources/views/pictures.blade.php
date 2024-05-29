@@ -9,7 +9,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
 
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="/script/script.js"></script>
@@ -26,6 +30,25 @@
         margin-top: 10px;
     }
 
+    .nav-link.dropdown-toggle {
+        position: relative;
+        padding-right: 1.5rem;
+    }
+
+    .nav-link.dropdown-toggle::after {
+        display: none;
+    }
+
+    /* Additional styles for the dropdown */
+    .dropdown-container .dropdown-menu {
+        background-color: #ffffff;
+        color: #000000;
+    }
+
+    .nav-link.dropdown-toggle i {
+        display: inline-block !important;
+    }
+
 </style>
 
 <body>
@@ -39,10 +62,9 @@
         </a>
 
 
-        <form class="form-inline my-2 my-lg-0">
+        <form class="form-inline my-2 my-lg-0" action="{{ route('search') }}" method="GET">
             <input class="form-control mr-sm-2" type="search" style="margin-left: 15px;" placeholder="Search here"
-                   aria-label="Search">
-
+                   aria-label="Search" name="query" id="searchInput">
         </form>
 
 
@@ -80,7 +102,7 @@
                             </i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('profile.show') }}">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider"/>
                             </li>
@@ -110,11 +132,8 @@
 
 
 <div class="container-fluid">
-
     <div class="row">
         <div class="col-lg-6 mx-auto" style="margin-top: 25px;">
-
-
             <form action="{{ route('post.timeline') }}" method="POST" enctype="multipart/form-data"
                   class="post-to-timeline shadow p-3 mb-3 bg-white rounded" style="margin-top: 20px;">
                 @csrf
@@ -127,10 +146,9 @@
                             <input type="file" id="image-upload" name="image" style="display: none;"
                                    onchange="previewImage(this)">
                         </label>
-                        <button type=" submit" class="btn btn-primary">Post</button>
+                        <button type="submit" class="btn btn-primary">Post</button>
                     </div>
                 </div>
-
             </form>
             <div>
                 @if (session('success'))
@@ -158,13 +176,9 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-
-
 </div>
-</div>
+
 
 <script>
     function previewImage(input) {
@@ -186,62 +200,111 @@
         reader.readAsDataURL(file);
     }
 
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('searchInput');
+        const searchForm = document.getElementById('searchForm');
+
+        let typingTimer; // Timer identifier
+        const doneTypingInterval = 500; // Time in milliseconds (0.5 seconds)
+
+        searchInput.addEventListener('input', function () {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(performSearch, doneTypingInterval);
+        });
+
+        function performSearch() {
+            searchForm.submit(); // Submit the form when typing stops
+        }
+    });
+
 
 </script>
 
 
 <div class="container posts-content">
 
+    @if ($posts->isEmpty())
+        <p>No results found.</p>
+    @else
+        <ul class="list-group">
+            @foreach($posts as $post)
+                <div class="row">
+                    <div class="col-lg-7 mx-auto">
+                        <div class="card mb-4 shadow p-3 mb-1 bg-white rounded">
 
-    @foreach($posts as $post)
-        <div class="row">
-            <div class="col-lg-7 mx-auto">
-                <div class="card mb-4 shadow p-3 mb-1 bg-white rounded">
-
-                    <div class="media mb-9" style="display: flex; align-items: center;">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                             class="d-block ui-w-40 rounded-circle"
-                             alt="" style="margin-left:15px;" style="flex-shrink: 0;">
+                            <div class="media mb-9" style="display: flex; align-items: center;">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                                     class="d-block ui-w-40 rounded-circle"
+                                     alt="" style="margin-left:15px;" style="flex-shrink: 0;">
 
 
-                        <div class="media-body ml-3">
-                            <h6 style="margin-left:15px;"> {{ $post->user->name }}</h6>
-                            <div class="text-muted small" style="margin-left:15px;">
-                                <h7>{{ $post->created_at->diffForHumans() }}</h7>
+                                <div class="media-body ml-3">
+                                    <h6 style="margin-left:15px;"> {{ $post->user->name }}</h6>
+                                    <div class="text-muted small" style="margin-left:15px;">
+                                        <h7>{{ $post->created_at->diffForHumans() }}</h7>
+                                    </div>
+                                </div>
+
+                                @auth
+
+                                    <div class="nav-item dropdown"
+                                         style="margin-left: auto; border-radius: 5px; padding: 5px;">
+                                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                                           data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-h"></i>
+                                        </a>
+
+                                        <div class="dropdown-menu dropdown-menu-left"
+                                             style="background-color: #ffffff; color: #000000;"
+                                             aria-labelledby="navbarDropdown">
+
+
+                                            <a class="dropdown-item"
+                                               href="{{ route('posts.delete', ['id' => $post->id]) }}"><i
+                                                    class="fas fa-trash-alt"></i> Delete</a>
+
+
+                                            <a class="dropdown-item" href="#"><i class="fas fa-edit"></i> Edit</a>
+
+
+                                        </div>
+
+                                    </div>
+                                @endauth
+
+
+                            </div>
+
+                            <p style="margin-left:15px;"> {{ $post->text }}
+                            </p>
+                            <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid"
+                                 style="width: 100%;"
+                                 height="600px" alt="">
+
+
+                            <div class="card-body">
+
+
+                            </div>
+
+
+                            <div class="card-footer">
+                                <a href="javascript:void(0)" class="d-inline-block text-muted">
+                                    <strong>123</strong> <small class="align-middle">Likes</small>
+                                </a>
+                                <a href="javascript:void(0)" class="d-inline-block text-muted ml-3"
+                                   style="margin-left:10px; color:blue;">
+                                    <small class="align-middle">Share</small>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <p style="margin-left:15px;"> {{ $post->text }}
-                    </p>
-                    <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid" style="width: 100%;"
-                         height="600px" alt="">
-
-
-                    <div class="card-body">
-
-
-                    </div>
-
-
-                    <div class="card-footer">
-                        <a href="javascript:void(0)" class="d-inline-block text-muted">
-                            <strong>123</strong> <small class="align-middle">Likes</small>
-                        </a>
-                        <a href="javascript:void(0)" class="d-inline-block text-muted ml-3"
-                           style="margin-left:10px; color:blue;">
-                            <small class="align-middle">Share</small>
-                        </a>
-                    </div>
                 </div>
-            </div>
-        </div>
 
-    @endforeach
-
+        @endforeach
+    @endif
 
 </div>
-
-</section>
 
 
 <script src="/script/script.js"></script>

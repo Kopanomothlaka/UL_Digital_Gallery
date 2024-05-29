@@ -12,6 +12,7 @@
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/png" href="img/logo.png">
@@ -37,6 +38,25 @@
             background-color: rgba(21, 20, 51, 0.479);
             z-index: -1;
 
+        }
+
+        .nav-link.dropdown-toggle {
+            position: relative;
+            padding-right: 1.5rem;
+        }
+
+        .nav-link.dropdown-toggle::after {
+            display: none;
+        }
+
+        /* Additional styles for the dropdown */
+        .dropdown-container .dropdown-menu {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .nav-link.dropdown-toggle i {
+            display: inline-block !important;
         }
     </style>
 

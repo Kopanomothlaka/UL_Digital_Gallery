@@ -11,190 +11,248 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <script src="/script/script.js"></script>
 
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/png" href="img/logo.png">
+    <style>
+        .nav-link.dropdown-toggle {
+            position: relative;
+            padding-right: 1.5rem;
+        }
+
+        .nav-link.dropdown-toggle::after {
+            display: none;
+        }
+
+        /* Additional styles for the dropdown */
+        .dropdown-container .dropdown-menu {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .nav-link.dropdown-toggle i {
+            display: inline-block !important;
+        }
+    </style>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg py-1.5 sticky-top ">
-        <div class="container-fluid">
+<nav class="navbar navbar-expand-lg py-1.5 sticky-top ">
+    <div class="container-fluid">
         <a href="welcome">
             <img src="/img/logo.png" alt="Logo">
         </a>
 
-                    <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" style="margin-left: 15px;" placeholder="Search here" aria-label="Search">
 
-                </form>
+        <form class="form-inline my-2 my-lg-0" action="{{ route('video.search') }}" method="GET">
+            <input class="form-control mr-sm-2" type="search" style="margin-left: 15px;" placeholder="Search here"
+                   aria-label="Search" name="query" id="searchInput">
+        </form>
 
 
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="welcome">Home</a>
+                </li>
+                @auth
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="welcome">Home</a>
+                        <a class="nav-link text-white" href="news">News</a>
                     </li>
-                    @auth
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="news">News</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="pictures">Pictures</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="videos">Videos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="contact">Contact</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i >
-                                    <img src="/img/profileicon.png" alt="icon" style="height: 35px;width: 35px;align-content: center">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="pictures">Pictures</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="videos">Videos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="contact">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i>
+                                <img src="/img/profileicon.png" alt="icon"
+                                     style="height: 35px;width: 35px;align-content: center">
 
-                                </i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">Profile</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
-                            </ul>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="news">News</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="pictures">Pictures</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="videos">Videos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="contact">Contact</a>
-                        </li>
-                </ul>
-                <a href="log" class="btn btn-primary">Log in</a>
-                @endauth
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-
-
-
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-6 mx-auto" style="margin-top: 25px;">
-
-
-
-
-
-                <form class="d-flex ms-auto shadow p-3 mb-1 bg-white rounded" enctype="multipart/form-data">
-    <input class="form-control me-2" type="file" accept="video/*" id="video-upload" onchange="previewVideo(this);" aria-label="Upload video">
-    <div class="input-group">
-        <input class="form-control" type="text" id="video-caption" placeholder="Enter caption" aria-label="Video caption" style="height: 50px;">
-        <button class="btn btn-outline-success" type="submit">Post Video</button>
-    </div>
-</form>
-</form>
-
-
-
-
-
-
-
-
-                <div class="row" id="video-preview" style="display: none;">
-                    <div class="col-lg-12 mx-auto">
-                        <video id="preview-video" width="320" height="240" controls>
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>
-            </div>
+                            </i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ route('profile.show') }}">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider"/>
+                            </li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="news">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="pictures">Pictures</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="videos">Videos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="contact">Contact</a>
+                    </li>
+            </ul>
+            <a href="log" class="btn btn-primary">Log in</a>
+            @endauth
+            </ul>
         </div>
     </div>
-
-    <script>
-        function previewVideo(input) {
-            var file = input.files[0];
-            var video = document.getElementById('preview-video');
-            var source = document.createElement('source');
-            source.setAttribute('src', URL.createObjectURL(file));
-            video.appendChild(source);
-            document.getElementById('video-preview').style.display = 'block';
-        }
-    </script>
+</nav>
 
 
-    <div class="container posts-content">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-lg-7 mx-auto">
-            <div class="card mb-4 shadow p-3 mb-1 bg-white rounded" style="margin :15px;">
-                <div class="media mb-9" style="display: flex; align-items: center;">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="d-block ui-w-40 rounded-circle" alt="" style="margin-left:15px;" style="flex-shrink: 0;">
-                    <div class="media-body ml-3">
-                        <h6 style="margin-left:15px;"> Kenneth Frazier</h6>
-                        <div class="text-muted small" style="margin-left:15px;"> <h7>3 days ago</h7></div>
+        <div class="col-lg-6 mx-auto" style="margin-top: 25px;">
+
+            <form action="{{ route('video.upload') }}" method="POST"
+                  class="d-flex ms-auto shadow p-3 mb-1 bg-white rounded" enctype="multipart/form-data">
+                @csrf
+                <div class="input-group">
+                    <textarea class="form-control" style="height: 70px; margin-bottom: 10px; resize: none;" name="title"
+                              placeholder="What's on your mind..."></textarea>
+                    <div class="input-group-append p-3">
+                        <label for="video-upload" class="btn btn-sm btn-default">
+                            <i class="fa fa-video-camera" style="color: white;"></i>
+                            <input type="file" id="video-upload" name="video" style="display: none;"
+                                   onchange="previewVideo(this)">
+                        </label>
+                        <button type="submit" class="btn btn-primary">Post</button>
                     </div>
                 </div>
-                <p style="margin-left:15px;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus commodo bibendum.</p>
-                <video src="/img/BETWAY APPP.mp4" class="img-fluid" style="width: 100%;" height="600px" controls autoplay loop alt="Video"></video>
-                <div class="card-body">
-                    <!-- Add any additional content related to the video here -->
-                </div>
-                <div class="card-footer">
-                    <a href="javascript:void(0)" class="d-inline-block text-muted">
-                        <strong>123</strong> <small class="align-middle">Likes</small>
-                    </a>
-                    <a href="javascript:void(0)" class="d-inline-block text-muted ml-3" style="margin-left:10px; color:blue;">
-                        <small class="align-middle">Share</small>
-                    </a>
-                </div>
+            </form>
+            <div class="mt-1">
+                @if($errors->any())
+                    <div class="col-12">
+                        @foreach($errors->all() as $error) @endforeach
+                        <div class="alert alert-danger"> {{$error}} </div>
+                    </div>
+
+                @endif
+                @if(session()->has('error'))
+                    <div class="alert-danger"> {{session('error')}} </div>
+                @endif
+                @if(session()->has('success'))
+                    <div class="alert alert-success"> {{session('success')}} </div>
+                @endif
             </div>
-        </div>
-    </div>
-    <!-- Add more rows and cards for other videos if needed -->
-    <div class="row">
-        <div class="col-lg-7 mx-auto">
-            <div class="card mb-4 shadow p-3 mb-1 bg-white rounded" style="margin :15px;">
-                <div class="media mb-9" style="display: flex; align-items: center;">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="d-block ui-w-40 rounded-circle" alt="" style="margin-left:15px;" style="flex-shrink: 0;">
-                    <div class="media-body ml-3">
-                        <h6 style="margin-left:15px;"> Kenneth Frazier</h6>
-                        <div class="text-muted small" style="margin-left:15px;"> <h7>3 days ago</h7></div>
+
+            <div>
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
                     </div>
-                </div>
-                <p style="margin-left:15px;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus commodo bibendum.</p>
-                <video src="/img/skomi.mp4" class="img-fluid" style="width: 100%;" height="600px" controls autoplay loop alt="Video"></video>
-                <div class="card-body">
-                    <!-- Add any additional content related to the video here -->
-                </div>
-                <div class="card-footer">
-                    <a href="javascript:void(0)" class="d-inline-block text-muted">
-                        <strong>123</strong> <small class="align-middle">Likes</small>
-                    </a>
-                    <a href="javascript:void(0)" class="d-inline-block text-muted ml-3" style="margin-left:10px; color:blue;">
-                        <small class="align-middle">Share</small>
-                    </a>
+                @endif
+            </div>
+
+
+            <div class="row" id="video-preview" style="display: none;">
+                <div class="col-lg-12 mx-auto">
+                    <video id="preview-video" width="320" height="240" controls>
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    function previewVideo(input) {
+        var file = input.files[0];
+        var video = document.getElementById('preview-video');
+        var source = document.createElement('source');
+        source.setAttribute('src', URL.createObjectURL(file));
+        video.appendChild(source);
+        document.getElementById('video-preview').style.display = 'block';
+    }
+
+    // Load videos without autoplay
+    document.addEventListener("DOMContentLoaded", function () {
+        var videos = document.querySelectorAll("video");
+        videos.forEach(function (video) {
+            video.autoplay = false;
+        });
+    });
+</script>
+
+
+<div class="container posts-content">
+
+    @if ($videos->isEmpty())
+        <p>No results found.</p>
+    @else
+        @foreach($videos as $video)
+            <div class="row">
+                <div class="col-lg-7 mx-auto">
+                    <div class="card mb-4 shadow p-3 mb-1 bg-white rounded" style="margin :15px;">
+                        <div class="media mb-9" style="display: flex; align-items: center;">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                                 class="d-block ui-w-40 rounded-circle"
+                                 alt="" style="margin-left:15px;" style="flex-shrink: 0;">
+                            <div class="media-body ml-3">
+                                <h6 style="margin-left:15px;"> {{ $video->user->name }}</h6>
+                                <div class="text-muted small" style="margin-left:15px;">
+                                    <h7>{{ $video->created_at->diffForHumans() }}</h7>
+                                </div>
+                            </div>
+                            @auth
+                                <div class="nav-item dropdown"
+                                     style="margin-left: auto; border-radius: 5px; padding: 5px;">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                                       data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-left"
+                                         style="background-color: #ffffff; color: #000000;"
+                                         aria-labelledby="navbarDropdown">
+
+                                        <a class="dropdown-item"
+                                           href="{{ route('videos.delete', ['id' => $video->id]) }}"><i
+                                                class="fas fa-trash-alt"></i> Delete</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-edit"></i> Edit</a>
+
+                                    </div>
+                                </div>
+                            @endauth
+                        </div>
+                        <p style="margin-left:15px;">{{ $video->title }}</p>
+                        <video src="{{ asset('storage/' . $video->video_path) }}" class="img-fluid" style="width: 100%;"
+                               height="600px" controls
+                               autoplay loop alt="Video"></video>
+                        <div class="card-body">
+                            <!-- Add any additional content related to the video here -->
+                        </div>
+                        <div class="card-footer">
+                            <a href="javascript:void(0)" class="d-inline-block text-muted">
+                                <strong>123</strong> <small class="align-middle">Likes</small>
+                            </a>
+                            <a href="javascript:void(0)" class="d-inline-block text-muted ml-3"
+                               style="margin-left:10px; color:blue;">
+                                <small class="align-middle">Share</small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        @endforeach
+    @endif
+
+</div>
 </body>
 
 </html>

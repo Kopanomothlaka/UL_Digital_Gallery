@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\ForgetPasswordManager;
 use App\Http\Controllers\TimelineController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\VideoSearchController;
 
 
 /*
@@ -32,11 +36,8 @@ Route::get('/UserHome', function () {
 Route::get('/news', function () {
     return view('news');
 });
-Route::get('/pictures', [TimelineController::class, 'showPictures'])->name('pictures');
 
-Route::get('/videos', function () {
-    return view('videos');
-});
+
 Route::get('/2020-2024', function () {
     return view('2020-2024');
 });
@@ -55,12 +56,6 @@ Route::post('/register', [AuthManager::class, 'registerPost'])->name('register.p
 
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/profile', function () {
-        return "eyy";
-    });
-
-});
 
 Route::get('/forget-password', [ForgetPasswordManager::class, "forgetPassword"])->name('forget.password');
 Route::post('/forget-password', [ForgetPasswordManager::class, "forgetPasswordPost"])->name('forget.password.post');
@@ -78,12 +73,37 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/users', function () {
         return view('admin.users');
     })->name('users');
-
-
 });
 
 
+Route::get('/pictures', [TimelineController::class, 'showPictures'])->name('pictures');
 Route::post('/post-to-timeline', [TimelineController::class, 'postToTimeline'])->name('post.timeline');
+
+
+Route::get('/videos', [VideoController::class, 'showVideos'])->name('videos');
+Route::post('/upload-video', [VideoController::class, 'uploadVideo'])->name('video.upload');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/profile', function () {
+        return "eyy";
+    });
+
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/show', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/update', [ProfileController::class, 'update'])->name('profile.update');
+});
+
+
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+Route::get('/search_videos', [VideoSearchController::class, 'search'])->name('video.search');
+Route::get('/posts/{id}', [TimelineController::class, 'delete'])->name('posts.delete');
+Route::delete('/videos/{id}', [TimelineController::class, 'delete'])->name('videos.delete');
+
+
+
 
 
 
