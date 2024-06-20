@@ -12873,3 +12873,14 @@ body {
     font-size: 0.75rem;
     border-radius: 0.375rem !important;
 }
+
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+}

@@ -10,9 +10,11 @@
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <script src="/script/script.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/png" href="img/logo.png">
@@ -118,16 +120,17 @@
     <div class="row">
         <div class="col-lg-6 mx-auto" style="margin-top: 25px;">
 
-            <form action="{{ route('video.upload') }}" method="POST"
+            <form id="postFormV" action="{{ route('video.upload') }}" method="POST"
                   class="d-flex ms-auto shadow p-3 mb-1 bg-white rounded" enctype="multipart/form-data">
                 @csrf
                 <div class="input-group">
-                    <textarea class="form-control" style="height: 70px; margin-bottom: 10px; resize: none;" name="title"
+                    <textarea class="form-control" id="postContentV"
+                              style="height: 70px; margin-bottom: 10px; resize: none;" name="title"
                               placeholder="What's on your mind..."></textarea>
                     <div class="input-group-append p-3">
                         <label for="video-upload" class="btn btn-sm btn-default">
                             <i class="fa fa-video-camera" style="color: white;"></i>
-                            <input type="file" id="video-upload" name="video" style="display: none;"
+                            <input type="file" id="video-upload" name="video" accept="video/*" style="display: none;"
                                    onchange="previewVideo(this)">
                         </label>
                         <button type="submit" class="btn btn-primary">Post</button>
@@ -150,14 +153,6 @@
                 @endif
             </div>
 
-            <div>
-                @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-            </div>
-
 
             <div class="row" id="video-preview" style="display: none;">
                 <div class="col-lg-12 mx-auto">
@@ -169,25 +164,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    function previewVideo(input) {
-        var file = input.files[0];
-        var video = document.getElementById('preview-video');
-        var source = document.createElement('source');
-        source.setAttribute('src', URL.createObjectURL(file));
-        video.appendChild(source);
-        document.getElementById('video-preview').style.display = 'block';
-    }
-
-    // Load videos without autoplay
-    document.addEventListener("DOMContentLoaded", function () {
-        var videos = document.querySelectorAll("video");
-        videos.forEach(function (video) {
-            video.autoplay = false;
-        });
-    });
-</script>
 
 
 <div class="container posts-content">
@@ -236,15 +212,24 @@
                         <div class="card-body">
                             <!-- Add any additional content related to the video here -->
                         </div>
-                        <div class="card-footer">
-                            <a href="javascript:void(0)" class="d-inline-block text-muted">
-                                <strong>123</strong> <small class="align-middle">Likes</small>
-                            </a>
-                            <a href="javascript:void(0)" class="d-inline-block text-muted ml-3"
-                               style="margin-left:10px; color:blue;">
-                                <small class="align-middle">Share</small>
-                            </a>
+
+
+                        <div>
+                            @if ($video->likes()->where('user_id', auth()->id())->exists())
+                                <form action="{{ route('videos.unlike', $video->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit">Unlike</button>
+                                </form>
+                            @else
+                                <form action="{{ route('videos.like', $video->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit">Like</button>
+                                </form>
+                            @endif
+
+                            <span id="like-count">{{ $video->likes()->count() }}</span> likes
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -253,6 +238,37 @@
     @endif
 
 </div>
+
+<script>
+    document.getElementById('postFormV').addEventListener('submit', function (event) {
+        @guest
+        event.preventDefault();
+        window.location.href = '{{ route('log') }}';
+        @endguest
+    });
+
+
+    function previewVideo(input) {
+        var file = input.files[0];
+        var video = document.getElementById('preview-video');
+        var source = document.createElement('source');
+        source.setAttribute('src', URL.createObjectURL(file));
+        video.appendChild(source);
+        document.getElementById('video-preview').style.display = 'block';
+    }
+
+    // Load videos without autoplay
+    document.addEventListener("DOMContentLoaded", function () {
+        var videos = document.querySelectorAll("video");
+        videos.forEach(function (video) {
+            video.autoplay = false;
+        });
+    });
+
+
+</script>
+
+
 </body>
 
 </html>

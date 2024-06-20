@@ -8,6 +8,7 @@ use App\Http\Controllers\VideoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VideoSearchController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -99,11 +100,13 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 Route::get('/search_videos', [VideoSearchController::class, 'search'])->name('video.search');
+
 Route::get('/posts/{id}', [TimelineController::class, 'delete'])->name('posts.delete');
-Route::delete('/videos/{id}', [TimelineController::class, 'delete'])->name('videos.delete');
+Route::get('/videos/{id}', [VideoController::class, 'delete'])->name('videos.delete');
 
+Route::get('/admin/dashboard', [UserController::class, 'dashboard']);
 
-
-
+Route::post('/videos/{video}/like', [VideoController::class, 'like'])->name('videos.like');
+Route::post('/videos/{video}/unlike', [VideoController::class, 'unlike'])->name('videos.unlike');
 
 

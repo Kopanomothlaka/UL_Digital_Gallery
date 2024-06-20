@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
     protected $table = "users";
 
     /**
@@ -24,7 +25,6 @@ class User extends Authenticatable
         'password',
         'phone',
     ];
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -34,7 +34,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
     /**
      * The attributes that should be cast.
      *
@@ -44,4 +43,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function mentionedInPosts()
+    {
+        return $this->belongsToMany(Post::class, 'mentions');
+    }
+
+    public function hasLiked(Video $video)
+    {
+        return $this->likes()->where('video_id', $video->id)->exists();
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }

@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
+use App\Notifications\UserMentioned;
 
 
 class TimelineController extends Controller
 {
     public function postToTimeline(Request $request)
     {
+
+        if (!auth()->check()) {
+            return redirect()->route('log')->with('error', 'You must be logged in to upload PICTURES.');
+        }
         $request->validate([
             'text' => 'required|string',
             'image' => 'required|image|max:50000', // Adjust max file size as needed
@@ -23,6 +29,18 @@ class TimelineController extends Controller
         $post->text = $request->text;
         $post->image_path = $imagePath;
         $post->save();
+
+        // Extract mentions from post text
+        preg_match_all('/@([\w\s]+)/', $post->text, $matches);
+        $mentionedUsers = User::whereIn('name', $matches[1])->get();
+
+
+        // Attach mentions to post
+        $post->mentions()->attach($mentionedUsers->pluck('id'));
+        // Notify mentioned users
+        foreach ($mentionedUsers as $user) {
+            $user->notify(new UserMentioned($user, $post));
+        }
 
 
         return redirect()->back()->with('success', 'Post created successfully.');

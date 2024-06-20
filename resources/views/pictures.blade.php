@@ -13,6 +13,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tributejs@5.1.3/dist/tribute.css">
+    <script src="https://unpkg.com/tributejs@5.1.3/dist/tribute.js"></script>
 
 
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
@@ -47,6 +49,25 @@
 
     .nav-link.dropdown-toggle i {
         display: inline-block !important;
+    }
+
+    .tribute-container {
+        font-size: 16px !important; /* Increase font size */
+        padding: 5px; /* Add padding for better spacing */
+    }
+
+    .tribute-container li {
+        padding: 10px; /* Add padding to each suggestion item */
+    }
+
+    .tribute-container li.highlight {
+        background-color: #f0f0f0; /* Change highlight background color */
+    }
+
+
+    .highlighted-user {
+        background-color: #ffff00; /* Yellow background */
+        font-weight: bold; /* Bold text */
     }
 
 </style>
@@ -134,27 +155,37 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-6 mx-auto" style="margin-top: 25px;">
-            <form action="{{ route('post.timeline') }}" method="POST" enctype="multipart/form-data"
+
+            <form id="postForm" action="{{ route('post.timeline') }}" method="POST" enctype="multipart/form-data"
                   class="post-to-timeline shadow p-3 mb-3 bg-white rounded" style="margin-top: 20px;">
                 @csrf
                 <div class="input-group">
-                    <textarea class="form-control" style="height: 70px; margin-bottom: 10px; resize: none;" name="text"
+                    <textarea class="form-control" id="postContent"
+                              style="height: 70px; margin-bottom: 10px; resize: none;" name="text"
                               placeholder="What's on your mind..."></textarea>
                     <div class="input-group-append p-3">
                         <label for="image-upload" class="btn btn-sm btn-default">
                             <i class="fa fa-camera" style="color: white;"></i>
-                            <input type="file" id="image-upload" name="image" style="display: none;"
+                            <input type="file" id="image-upload" name="image" accept="image/*" style="display: none;"
                                    onchange="previewImage(this)">
                         </label>
                         <button type="submit" class="btn btn-primary">Post</button>
                     </div>
                 </div>
             </form>
-            <div>
-                @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
+            <div class="mt-1">
+                @if($errors->any())
+                    <div class="col-12">
+                        @foreach($errors->all() as $error) @endforeach
+                        <div class="alert alert-danger"> {{$error}} </div>
                     </div>
+
+                @endif
+                @if(session()->has('error'))
+                    <div class="alert-danger"> {{session('error')}} </div>
+                @endif
+                @if(session()->has('success'))
+                    <div class="alert alert-success"> {{session('success')}} </div>
                 @endif
             </div>
             <div class="row" id="image-preview" style="display: none;">
@@ -307,7 +338,63 @@
 </div>
 
 
-<script src="/script/script.js"></script>
+<script>
+
+
+    document.getElementById('postForm').addEventListener('submit', function (event) {
+        @guest
+        event.preventDefault();
+        window.location.href = '{{ route('log') }}';
+        @endguest
+    });
+
+    var tribute = new Tribute({
+        trigger: '@',
+        values: function (text, cb) {
+            fetch('/api/users?query=' + text).then(res => res.json()).then(data => cb(data.map(user => ({
+                key: user.name,
+                value: user.name
+            }))));
+        },
+        selectTemplate: function (item) {
+            return item.original.value; // Return the user's name without "@" symbol
+        },
+        menuItemLimit: 10 // Limit the number of suggestions
+    });
+
+    tribute.attach(document.getElementById('postContent'));
+
+    // Event handler to remove "@" and highlight selected user's name
+    document.getElementById('postContent').addEventListener('tribute-replaced',
+        function (e) {
+            const selectedText = e.detail.item.original.key; // Get the selected user's name
+            const currentText = this.value;
+            const replacedText = currentText.replace('@' + selectedText, selectedText);
+            this.value = replacedText;
+
+            // Highlight the selected user's name
+            const startIndex = replacedText.lastIndexOf(selectedText);
+            const endIndex = startIndex + selectedText.length;
+            this.setSelectionRange(startIndex, endIndex);
+            this.focus();
+            document.execCommand('hiliteColor', false, '#ffff00'); // Yellow highlight
+            window.getSelection().collapseToEnd(); // Collapse the selection to the end
+        });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the textarea element
+        var textArea = document.getElementById('postContent');
+
+        // Add an event listener for input changes
+        textArea.addEventListener('input', function () {
+            // Limit the text to 255 characters
+            if (this.value.length > 150) {
+                this.value = this.value.substring(0, 150);
+            }
+        });
+    });
+</script>
 
 </body>
 
