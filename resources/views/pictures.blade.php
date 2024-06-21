@@ -247,6 +247,121 @@
 </div>
 
 
+<div class="container posts-content">
+
+    @if ($posts->isEmpty())
+        <p>No results found.</p>
+    @else
+        <ul class="list-group">
+            @foreach($posts as $post)
+                <div class="row">
+                    <div class="col-lg-7 mx-auto">
+                        <div class="card mb-4 shadow p-3 mb-1 bg-white rounded">
+
+                            <div class="media mb-9" style="display: flex; align-items: center;">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                                     class="d-block ui-w-40 rounded-circle"
+                                     alt="" style="margin-left:15px;" style="flex-shrink: 0;">
+
+
+                                <div class="media-body ml-3">
+                                    <h6 style="margin-left:15px;"> {{ $post->user->name }}</h6>
+                                    <div class="text-muted small" style="margin-left:15px;">
+                                        <h7>{{ $post->created_at->diffForHumans() }}</h7>
+                                    </div>
+                                </div>
+
+                                @auth
+                                    <div class="nav-item dropdown"
+                                         style="margin-left: auto; border-radius: 5px; padding: 5px;">
+                                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                                           data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-h"></i>
+                                        </a>
+
+                                        <div class="dropdown-menu dropdown-menu-left"
+                                             style="background-color: #ffffff; color: #000000;"
+                                             aria-labelledby="navbarDropdown">
+
+                                            <a class="dropdown-item"
+                                               href="{{ route('posts.delete', ['id' => $post->id]) }}"><i
+                                                    class="fas fa-trash-alt"></i> Delete</a>
+
+                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                               data-bs-target="#editCaptionModal-{{ $post->id }}"><i
+                                                    class="fas fa-edit"></i> Edit</a>
+
+                                        </div>
+
+                                    </div>
+                                @endauth
+                            </div>
+
+                            <p style="margin-left:15px;"> {{ $post->text }}
+                            </p>
+                            <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid"
+                                 style="width: 100%;"
+                                 height="600px" alt="">
+
+                            <div class="card-body"></div>
+
+                            <div>
+                                @auth
+                                    @if (auth()->user()->likedPictures->contains($post->id))
+                                        <form action="{{ route('posts.unlike', $post->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="unlike-btn">
+                                                <i class="fas fa-thumbs-down"></i>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('posts.like', $post->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="like-btn">
+                                                <i class="fas fa-thumbs-up"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endauth
+                                <span>{{ $post->likes()->count() }}</span> likes
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edit Caption Modal -->
+                <div class="modal fade" id="editCaptionModal-{{ $post->id }}" tabindex="-1"
+                     aria-labelledby="editCaptionModalLabel-{{ $post->id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editCaptionModalLabel-{{ $post->id }}">Edit Caption</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('posts.updateCaption', $post->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="mb-5">
+                                        <label for="caption-{{ $post->id }}" class="form-label">Caption</label>
+                                        <textarea type="text" class="form-control" id="caption-{{ $post->id }}"
+                                                  name="caption">{{ $post->text }}</textarea>
+
+                                        <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid"
+                                             style="width: 100%; margin-top: 10px" height="600px" alt="">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        @endforeach
+    @endif
+</div>
+
+
 <script>
     function previewImage(input) {
         var file = input.files[0];
@@ -283,112 +398,6 @@
             searchForm.submit(); // Submit the form when typing stops
         }
     });
-
-
-</script>
-
-
-<div class="container posts-content">
-
-    @if ($posts->isEmpty())
-        <p>No results found.</p>
-    @else
-        <ul class="list-group">
-            @foreach($posts as $post)
-                <div class="row">
-                    <div class="col-lg-7 mx-auto">
-                        <div class="card mb-4 shadow p-3 mb-1 bg-white rounded">
-
-                            <div class="media mb-9" style="display: flex; align-items: center;">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                     class="d-block ui-w-40 rounded-circle"
-                                     alt="" style="margin-left:15px;" style="flex-shrink: 0;">
-
-
-                                <div class="media-body ml-3">
-                                    <h6 style="margin-left:15px;"> {{ $post->user->name }}</h6>
-                                    <div class="text-muted small" style="margin-left:15px;">
-                                        <h7>{{ $post->created_at->diffForHumans() }}</h7>
-                                    </div>
-                                </div>
-
-                                @auth
-
-                                    <div class="nav-item dropdown"
-                                         style="margin-left: auto; border-radius: 5px; padding: 5px;">
-                                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                                           data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-h"></i>
-                                        </a>
-
-                                        <div class="dropdown-menu dropdown-menu-left"
-                                             style="background-color: #ffffff; color: #000000;"
-                                             aria-labelledby="navbarDropdown">
-
-
-                                            <a class="dropdown-item"
-                                               href="{{ route('posts.delete', ['id' => $post->id]) }}"><i
-                                                    class="fas fa-trash-alt"></i> Delete</a>
-
-
-                                            <a class="dropdown-item" href="#"><i class="fas fa-edit"></i> Edit</a>
-
-
-                                        </div>
-
-                                    </div>
-                                @endauth
-
-
-                            </div>
-
-                            <p style="margin-left:15px;"> {{ $post->text }}
-                            </p>
-                            <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid"
-                                 style="width: 100%;"
-                                 height="600px" alt="">
-
-
-                            <div class="card-body">
-
-
-                            </div>
-
-
-                            <div>
-                                @auth()
-
-                                    @if (auth()->user()->likedPictures->contains($post->id))
-                                        <form action="{{ route('posts.unlike', $post->id) }}" method="POST">
-                                            @csrf
-                                            <button type="submit" class="unlike-btn">
-                                                <i class="fas fa-thumbs-down"></i>
-                                            </button>
-                                        </form>
-                                    @else
-                                        <form action="{{ route('posts.like', $post->id) }}" method="POST">
-                                            @csrf
-                                            <button type="submit" class="like-btn">
-                                                <i class="fas fa-thumbs-up"></i>
-                                            </button>
-                                        </form>
-                                    @endif
-                                @endauth
-                                <span>{{ $post->likes()->count() }}</span> likes
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-        @endforeach
-    @endif
-
-</div>
-
-
-<script>
 
 
     document.getElementById('postForm').addEventListener('submit', function (event) {

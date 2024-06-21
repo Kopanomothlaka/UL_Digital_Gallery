@@ -89,4 +89,19 @@ class TimelineController extends Controller
         return redirect()->back()->with('success', 'Picture Unliked.');
     }
 
+
+    public function updateCaption(Request $request, $id)
+    {
+        $request->validate([
+            'caption' => 'required|string|max:255',
+        ]);
+
+        $post = Post::findOrFail($id);
+        $post->text = $request->caption;
+        $post->save();
+
+        return redirect()->back()->with('success', 'Caption updated successfully.');
+    }
+
+
 }

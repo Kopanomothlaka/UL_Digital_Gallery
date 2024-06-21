@@ -67,4 +67,19 @@ class VideoController extends Controller
 
 
     }
+
+    public function updateTitle(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
+
+        $video = Video::findOrFail($id);
+        $video->title = $request->title;
+        $video->save();
+
+        return redirect()->back()->with('success', 'Title updated successfully.');
+    }
+
+
 }

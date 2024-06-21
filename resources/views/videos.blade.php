@@ -202,7 +202,6 @@
     </div>
 </div>
 
-
 <div class="container posts-content">
 
     @if ($videos->isEmpty())
@@ -236,7 +235,9 @@
                                         <a class="dropdown-item"
                                            href="{{ route('videos.delete', ['id' => $video->id]) }}"><i
                                                 class="fas fa-trash-alt"></i> Delete</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-edit"></i> Edit</a>
+                                        <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                           data-bs-target="#editTitleModal-{{ $video->id }}"><i class="fas fa-edit"></i>
+                                            Edit</a>
 
                                     </div>
                                 </div>
@@ -278,10 +279,41 @@
                 </div>
             </div>
 
+            <!-- Edit Title Modal -->
+            <div class="modal fade" id="editTitleModal-{{ $video->id }}" tabindex="-1"
+                 aria-labelledby="editTitleModalLabel-{{ $video->id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editTitleModalLabel-{{ $video->id }}">Edit Title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('videos.updateTitle', $video->id) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <div class="mb-3">
+                                    <label for="title-{{ $video->id }}" class="form-label">Title</label>
+
+                                    <textarea type="text" class="form-control" id="title-{{ $video->id }}" name="title"
+                                    >{{ $video->title }}</textarea>
+
+                                    <video src="{{ asset('storage/' . $video->video_path) }}" class="img-fluid"
+                                           style="width: 100%;margin-top: 10px"
+                                           height="600px" controls
+                                           autoplay loop alt="Video"></video>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endforeach
     @endif
 
 </div>
+
 
 <script>
 

@@ -112,6 +112,9 @@ Route::post('/videos/{video}/unlike', [VideoController::class, 'unlike'])->name(
 Route::post('/posts/{id}/like', [TimelineController::class, 'like'])->middleware('auth')->name('posts.like');
 Route::post('/posts/{id}/unlike', [TimelineController::class, 'unlike'])->middleware('auth')->name('posts.unlike');
 
+Route::put('/posts/{id}/updateCaption', [TimelineController::class, 'updateCaption'])->name('posts.updateCaption');
+Route::put('/videos/{id}/updateTitle', [VideoController::class, 'updateTitle'])->name('videos.updateTitle');
+
 
 
 
