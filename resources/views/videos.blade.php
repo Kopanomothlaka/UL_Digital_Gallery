@@ -37,6 +37,43 @@
         .nav-link.dropdown-toggle i {
             display: inline-block !important;
         }
+
+
+        .like-btn {
+            background-color: #C8AB4D; /* Red background */
+            border: none; /* Remove border */
+            color: white; /* White text */
+            padding: 10px 16px; /* Add some padding */
+            text-align: center; /* Center the icon */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Display as inline-block */
+            font-size: 16px; /* Set the font size */
+            margin: 4px 2px; /* Add some margin */
+            cursor: pointer; /* Change the cursor to a pointer on hover */
+            border-radius: 50%; /* Make it a circle */
+        }
+
+        .like-btn:hover {
+            background-color: #C8AB4D; /* Slightly darker green on hover */
+        }
+
+        .unlike-btn {
+            background-color: #f44336; /* Red background */
+            border: none; /* Remove border */
+            color: white; /* White text */
+            padding: 10px 16px; /* Add some padding */
+            text-align: center; /* Center the icon */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Display as inline-block */
+            font-size: 16px; /* Set the font size */
+            margin: 4px 2px; /* Add some margin */
+            cursor: pointer; /* Change the cursor to a pointer on hover */
+            border-radius: 50%; /* Make it a circle */
+        }
+
+        .unlike-btn:hover {
+            background-color: #c62828; /* Slightly darker red on hover */
+        }
     </style>
 </head>
 
@@ -215,17 +252,24 @@
 
 
                         <div>
-                            @if ($video->likes()->where('user_id', auth()->id())->exists())
-                                <form action="{{ route('videos.unlike', $video->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit">Unlike</button>
-                                </form>
-                            @else
-                                <form action="{{ route('videos.like', $video->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit">Like</button>
-                                </form>
-                            @endif
+                            @auth
+                                @if ($video->likes()->where('user_id', auth()->id())->exists())
+                                    <form action="{{ route('videos.unlike', $video->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="unlike-btn">
+                                            <i class="fas fa-thumbs-down"></i>
+                                        </button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('videos.like', $video->id) }}" method="POST">
+                                        @csrf
+
+                                        <button type="submit" class="like-btn">
+                                            <i class="fas fa-thumbs-up"></i>
+                                        </button>
+                                    </form>
+                                @endif
+                            @endauth
 
                             <span id="like-count">{{ $video->likes()->count() }}</span> likes
                         </div>
@@ -240,6 +284,8 @@
 </div>
 
 <script>
+
+
     document.getElementById('postFormV').addEventListener('submit', function (event) {
         @guest
         event.preventDefault();

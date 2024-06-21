@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use App\Notifications\UserMentioned;
+use Illuminate\Support\Facades\Auth;
 
 
 class TimelineController extends Controller
@@ -54,6 +55,7 @@ class TimelineController extends Controller
         return view('pictures', ['posts' => $posts]);
     }
 
+
     public function delete(Request $request, $id)
     {
         $post = Post::findOrFail($id);
@@ -62,5 +64,29 @@ class TimelineController extends Controller
         return redirect()->back()->with('success', 'Post deleted successfully!');
     }
 
+
+    public function like(Request $request, $id)
+    {
+        $post = Post::findOrFail($id);
+        $user = Auth::user();
+
+        if (!$user->likedPictures()->where('post_id', $id)->exists()) {
+            $user->likedPictures()->attach($id);
+        }
+
+        return redirect()->back()->with('success', 'Picture liked .');
+    }
+
+    public function unlike(Request $request, $id)
+    {
+        $post = Post::findOrFail($id);
+        $user = Auth::user();
+
+        if ($user->likedPictures()->where('post_id', $id)->exists()) {
+            $user->likedPictures()->detach($id);
+        }
+
+        return redirect()->back()->with('success', 'Picture Unliked.');
+    }
 
 }

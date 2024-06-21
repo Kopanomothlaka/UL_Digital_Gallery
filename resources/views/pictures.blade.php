@@ -70,6 +70,42 @@
         font-weight: bold; /* Bold text */
     }
 
+    .like-btn {
+        background-color: #C8AB4D; /* Red background */
+        border: none; /* Remove border */
+        color: white; /* White text */
+        padding: 10px 16px; /* Add some padding */
+        text-align: center; /* Center the icon */
+        text-decoration: none; /* Remove underline */
+        display: inline-block; /* Display as inline-block */
+        font-size: 16px; /* Set the font size */
+        margin: 4px 2px; /* Add some margin */
+        cursor: pointer; /* Change the cursor to a pointer on hover */
+        border-radius: 50%; /* Make it a circle */
+    }
+
+    .like-btn:hover {
+        background-color: #C8AB4D; /* Slightly darker green on hover */
+    }
+
+    .unlike-btn {
+        background-color: #f44336; /* Red background */
+        border: none; /* Remove border */
+        color: white; /* White text */
+        padding: 10px 16px; /* Add some padding */
+        text-align: center; /* Center the icon */
+        text-decoration: none; /* Remove underline */
+        display: inline-block; /* Display as inline-block */
+        font-size: 16px; /* Set the font size */
+        margin: 4px 2px; /* Add some margin */
+        cursor: pointer; /* Change the cursor to a pointer on hover */
+        border-radius: 50%; /* Make it a circle */
+    }
+
+    .unlike-btn:hover {
+        background-color: #c62828; /* Slightly darker red on hover */
+    }
+
 </style>
 
 <body>
@@ -319,14 +355,28 @@
                             </div>
 
 
-                            <div class="card-footer">
-                                <a href="javascript:void(0)" class="d-inline-block text-muted">
-                                    <strong>123</strong> <small class="align-middle">Likes</small>
-                                </a>
-                                <a href="javascript:void(0)" class="d-inline-block text-muted ml-3"
-                                   style="margin-left:10px; color:blue;">
-                                    <small class="align-middle">Share</small>
-                                </a>
+                            <div>
+                                @auth()
+
+                                    @if (auth()->user()->likedPictures->contains($post->id))
+                                        <form action="{{ route('posts.unlike', $post->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="unlike-btn">
+                                                <i class="fas fa-thumbs-down"></i>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('posts.like', $post->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="like-btn">
+                                                <i class="fas fa-thumbs-up"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endauth
+                                <span>{{ $post->likes()->count() }}</span> likes
+
+
                             </div>
                         </div>
                     </div>

@@ -109,4 +109,10 @@ Route::get('/admin/dashboard', [UserController::class, 'dashboard']);
 Route::post('/videos/{video}/like', [VideoController::class, 'like'])->name('videos.like');
 Route::post('/videos/{video}/unlike', [VideoController::class, 'unlike'])->name('videos.unlike');
 
+Route::post('/posts/{id}/like', [TimelineController::class, 'like'])->middleware('auth')->name('posts.like');
+Route::post('/posts/{id}/unlike', [TimelineController::class, 'unlike'])->middleware('auth')->name('posts.unlike');
+
+
+
+
 

@@ -21,5 +21,11 @@ class Like extends Model
         return $this->belongsTo(Video::class);
     }
 
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+
+
     use HasFactory;
 }
