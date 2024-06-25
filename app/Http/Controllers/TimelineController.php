@@ -44,13 +44,17 @@ class TimelineController extends Controller
         }
 
 
-        return redirect()->back()->with('success', 'Post created successfully.');
+        return redirect()->back()->with('success', 'Post created successfully but wait for the approval from Admin');
     }
 
 
     public function showPictures()
     {
+        // Fetch all posts ordered by creation date
         $posts = Post::orderByDesc('created_at')->get();
+
+        // Filter only approved posts
+        $posts = $posts->where('status', 'approved');
 
         return view('pictures', ['posts' => $posts]);
     }

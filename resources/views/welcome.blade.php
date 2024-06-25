@@ -281,7 +281,7 @@
 
 
                     </div>
-                    <a href="admin.dashboard" style="color: white; text-underline: #0a58ca;">admin</a>
+                    <a href="#" style="color: white; text-underline: #0a58ca;">admin</a>
 
 
                 </div>

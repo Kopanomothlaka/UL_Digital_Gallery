@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('admin.layouts.app')
 
 @section('content')
     <div class="container">
@@ -23,9 +23,7 @@
                         <td>{{ $post->user->name }}</td>
                         <td>{{ $post->user->email }}</td>
                         <td>
-                            @if($post->image_path)
-                                <img src="{{ asset('storage/' . $post->image_path) }}" alt="Image" width="100">
-                            @endif
+
                         </td>
                         <td>{{ $post->status }}</td>
                         <td>

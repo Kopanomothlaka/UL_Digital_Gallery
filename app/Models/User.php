@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
+        'profile_picture',
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -62,6 +63,17 @@ class User extends Authenticatable
     public function likedPictures()
     {
         return $this->belongsToMany(Post::class, 'like_pictures', 'user_id', 'post_id')->withTimestamps();
+    }
+
+    public function videos()
+    {
+        return $this->hasMany(Video::class);
+    }
+
+    // Define relationship with pictures
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 
 

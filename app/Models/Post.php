@@ -10,7 +10,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['text', 'image_path'];
+    protected $fillable = ['text', 'image_path', 'status',];
 
     // Define the relationship with the User model
     public function user()

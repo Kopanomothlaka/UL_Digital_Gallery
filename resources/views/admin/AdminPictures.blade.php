@@ -1,56 +1,54 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Approve or Reject Pictures')
-
 @section('content')
-
-    <h1 class="mt-4">Pictures</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Pictures</li>
-    </ol>
-    <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            Users List
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table id="datatablesSimple" class="table table-bordered">
-                    <thead>
+   
+    <div class="card-body">
+        <h1>Pending Posts</h1>
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+        <div class="table-responsive">
+            <table id="datatablesSimple" class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Pictures</th>
+                    <th>Caption</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($posts as $post)
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Pictures</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                        <td>{{ $post->user->name }}</td>
+                        <td>{{ $post->user->email }}</td>
 
-                    <tr>
-                        <td>#</td>
-                        <td>#</td>
-                        <td>#</td>
-                        <td>#</td>
                         <td>
+                            @if($post->image_path)
+                                <img src="{{ asset('storage/' . $post->image_path) }}" alt="Image" width="100">
 
-                            <a onclick="return confirm('Are you sure you want to delete this user?')"
-                               href="" class="btn btn-danger btn-sm">Approve</a>
-
-                            <a onclick="return confirm('Are you sure you want to delete this user?')"
-                               href="" class="btn btn-danger btn-sm">Reject</a>
-                        </td>
-                        <td>
-
-
+                            @endif
                         </td>
 
+                        <td>{{ $post->status }}</td>
+                        <td>
+                            <form action="{{ route('admin.posts.approve', $post) }}" method="POST"
+                                  style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-success">Approve</button>
+                            </form>
+                            <form action="{{ route('admin.posts.reject', $post) }}" method="POST"
+                                  style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Reject</button>
+                            </form>
+                        </td>
                     </tr>
-
-                    </tbody>
-                </table>
-            </div>
+                @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
-
 @endsection
-

@@ -7,14 +7,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="{{ asset('admin/css/styles.css') }}" rel="stylesheet"/>
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <link href="{{ asset('admin/css/admin_styles.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('/css/admin_styles.css') }}" rel="stylesheet"/>
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <a class="navbar-brand ps-3" href="#">ADMIN</a>
+
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
     </button>
+
     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
         <div class="input-group">
             <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
@@ -34,7 +36,12 @@
                 <li>
                     <hr class="dropdown-divider"/>
                 </li>
-                <li><a class="dropdown-item" href="#">Logout</a></li>
+                <li>
+                    <form action="{{ route('admin.logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="dropdown-item">Logout</button>
+                    </form>
+                </li>
             </ul>
         </li>
     </ul>
@@ -55,6 +62,25 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Users
                     </a>
+                    <a class="nav-link" href="{{ url('admin/AdminPictures') }}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-image"></i></div>
+                        Pictures
+                    </a>
+
+                    <a class="nav-link" href="{{ url('admin/AdminVideos') }}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-video"></i></div>
+                        Videos
+                    </a>
+                    <a class="nav-link" href="#">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-newspaper"></i></div>
+                        News
+                    </a>
+                    <a class="nav-link" href="#">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                        Charts
+                    </a>
+
+
                 </div>
             </div>
         </nav>
@@ -69,7 +95,7 @@
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">&copy; Your Website 2023</div>
+                    <div class="text-muted">&copy; University of Limpopo 2024</div>
                     <div>
                         <a href="#">Privacy Policy</a>
                         &middot;
@@ -90,5 +116,18 @@
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
         crossorigin="anonymous"></script>
 <script src="{{ asset('admin/js/datatables-simple-demo.js') }}"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const sidebarToggle = document.querySelector('#sidebarToggle');
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener('click', function (event) {
+                event.preventDefault();
+                document.body.classList.toggle('sb-sidenav-toggled');
+            });
+        }
+    });
+
+</script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminAuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\ForgetPasswordManager;
@@ -9,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VideoSearchController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 
 
 /*
@@ -65,18 +67,6 @@ Route::get('/reset-password/{token}', [ForgetPasswordManager::class, "resetPassw
 Route::post('/reset-password', [ForgetPasswordManager::class, "resetPasswordPost"])->name('reset.password.post');
 
 
-// routes/web.php
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
-
-    Route::get('/users', function () {
-        return view('admin.users');
-    })->name('users');
-});
-
-
 Route::get('/pictures', [TimelineController::class, 'showPictures'])->name('pictures');
 Route::post('/post-to-timeline', [TimelineController::class, 'postToTimeline'])->name('post.timeline');
 
@@ -104,7 +94,6 @@ Route::get('/search_videos', [VideoSearchController::class, 'search'])->name('vi
 Route::get('/posts/{id}', [TimelineController::class, 'delete'])->name('posts.delete');
 Route::get('/videos/{id}', [VideoController::class, 'delete'])->name('videos.delete');
 
-Route::get('/admin/dashboard', [UserController::class, 'dashboard']);
 
 Route::post('/videos/{video}/like', [VideoController::class, 'like'])->name('videos.like');
 Route::post('/videos/{video}/unlike', [VideoController::class, 'unlike'])->name('videos.unlike');
@@ -114,6 +103,31 @@ Route::post('/posts/{id}/unlike', [TimelineController::class, 'unlike'])->middle
 
 Route::put('/posts/{id}/updateCaption', [TimelineController::class, 'updateCaption'])->name('posts.updateCaption');
 Route::put('/videos/{id}/updateTitle', [VideoController::class, 'updateTitle'])->name('videos.updateTitle');
+
+Route::put('/profile/updatePicture', [ProfileController::class, 'updatePicture'])->name('profile.updatePicture');
+Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+
+//admin
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.post');
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth:admins');
+
+    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+    Route::get('/users', [DashboardController::class, 'users'])->name('admin.users');
+    Route::post('/block-user/{id}', [DashboardController::class, 'blockUser'])->name('admin.block.user');
+    Route::post('/delete-user/{id}', [DashboardController::class, 'deleteUser'])->name('admin.delete.user');
+
+
+    Route::get('/AdminPictures', [DashboardController::class, 'AdminPictures'])->name('admin.AdminPictures');
+    Route::get('/AdminVideos', [DashboardController::class, 'AdminVideos'])->name('admin.AdminVideos');
+    Route::get('/admin/posts/pending', [DashboardController::class, 'pendingPosts'])->name('admin.posts.pending');
+    Route::post('/admin/posts/{post}/approve', [DashboardController::class, 'approvePost'])->name('admin.posts.approve');
+    Route::post('/admin/posts/{post}/reject', [DashboardController::class, 'rejectPost'])->name('admin.posts.reject');
+
+});
+
 
 
 
