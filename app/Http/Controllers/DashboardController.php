@@ -70,18 +70,18 @@ class DashboardController extends Controller
         $posts = Post::where('status', 'pending')->get();
         return view('admin.posts.pending', compact('posts'));
     }
-    
+
 
     public function approvePost(Post $post)
     {
         $post->update(['status' => 'approved']);
-        return redirect()->route('admin.posts.pending')->with('success', 'Post approved successfully.');
+        return redirect()->route('admin.AdminPictures')->with('success', 'Post approved successfully.');
     }
 
     public function rejectPost(Post $post)
     {
         $post->update(['status' => 'rejected']);
-        return redirect()->route('admin.posts.pending')->with('success', 'Post rejected successfully.');
+        return redirect()->route('admin.AdminPictures')->with('success', 'Post rejected successfully.');
     }
 
 

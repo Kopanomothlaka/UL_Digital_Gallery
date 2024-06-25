@@ -1,39 +1,29 @@
 @extends('admin.layouts.app')
 
 @section('content')
-   
     <div class="card-body">
-        <h1>Pending Posts</h1>
-        @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-        <div class="table-responsive">
-            <table id="datatablesSimple" class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Pictures</th>
-                    <th>Caption</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($posts as $post)
-                    <tr>
-                        <td>{{ $post->user->name }}</td>
-                        <td>{{ $post->user->email }}</td>
-
-                        <td>
+        <h1>Pictures</h1>
+        
+        <a href="{{ route('admin.posts.pending') }}">
+            Pending Posts
+        </a>
+        <div class="row">
+            @foreach($posts as $post)
+                <div class="col-sm-6">
+                    <div class="card mt-3">
+                        <div class="card-header"><strong>{{ $post->user->name }}</strong></div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{$post->text}}</h5>
                             @if($post->image_path)
-                                <img src="{{ asset('storage/' . $post->image_path) }}" alt="Image" width="100">
+                                <img src="{{ asset('storage/' . $post->image_path) }}" alt="Image" width="500"
+                                     height="500">
 
                             @endif
-                        </td>
+                            <h6 class="card-title mt-3 "><strong>{{ $post->status }}</strong></h6>
+                        </div>
+                        <div class="card-footer bg-transparent border-success">
 
-                        <td>{{ $post->status }}</td>
-                        <td>
+
                             <form action="{{ route('admin.posts.approve', $post) }}" method="POST"
                                   style="display:inline;">
                                 @csrf
@@ -44,11 +34,12 @@
                                 @csrf
                                 <button type="submit" class="btn btn-danger">Reject</button>
                             </form>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
         </div>
     </div>
+
 @endsection
