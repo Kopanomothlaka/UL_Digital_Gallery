@@ -10,7 +10,7 @@ class Video extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'video_path'];
+        'title', 'video_path', 'status',];
 
     // Define the relationship with the User model
     public function user()

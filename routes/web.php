@@ -126,6 +126,12 @@ Route::prefix('admin')->group(function () {
     Route::post('/admin/posts/{post}/approve', [DashboardController::class, 'approvePost'])->name('admin.posts.approve');
     Route::post('/admin/posts/{post}/reject', [DashboardController::class, 'rejectPost'])->name('admin.posts.reject');
 
+
+    Route::get('/admin/videos', [DashboardController::class, 'showPendingVideos'])->name('admin.videos.index');
+    Route::post('/admin/videos/{video}/Vapprove', [DashboardController::class, 'Vapprove'])->name('admin.videos.approve');
+    Route::post('/admin/videos/{video}/Vreject', [DashboardController::class, 'Vreject'])->name('admin.videos.reject');
+
+
 });
 
 

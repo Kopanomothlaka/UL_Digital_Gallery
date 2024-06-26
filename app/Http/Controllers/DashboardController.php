@@ -52,7 +52,8 @@ class DashboardController extends Controller
     public function AdminPictures()
     {
         // Fetch the posts from the database
-        $posts = Post::all();
+        
+        $posts = Post::orderBy('created_at', 'desc')->get();
 
         // Return the view with the posts variable
         return view('admin.AdminPictures', ['posts' => $posts]);
@@ -60,8 +61,9 @@ class DashboardController extends Controller
 
     public function AdminVideos()
     {
+        $videos = Video::orderBy('created_at', 'desc')->get();
 
-        return view('admin.AdminVideos');
+        return view('admin.AdminVideos', ['videos' => $videos]);
     }
 
 
@@ -82,6 +84,27 @@ class DashboardController extends Controller
     {
         $post->update(['status' => 'rejected']);
         return redirect()->route('admin.AdminPictures')->with('success', 'Post rejected successfully.');
+    }
+
+    public function showPendingVideos()
+    {
+        $videos = Video::where('status', 'pending')
+            ->orderBy('created_at', 'desc') // Order by creation date in descending order
+            ->get(); // Fetch videos with 'pending' status
+        return view('admin.videos.index', compact('videos'));
+    }
+
+
+    public function Vapprove(Video $video)
+    {
+        $video->update(['status' => 'approved']);
+        return redirect()->route('admin.AdminVideos')->with('success', 'Video approved successfully.');
+    }
+
+    public function Vreject(Video $video)
+    {
+        $video->update(['status' => 'rejected'])->orderBy('created_at', 'desc');
+        return redirect()->route('admin.AdminVideos')->with('success', 'Video rejected successfully.');
     }
 
 

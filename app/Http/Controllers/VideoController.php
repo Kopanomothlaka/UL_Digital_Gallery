@@ -28,13 +28,16 @@ class VideoController extends Controller
         $video->video_path = $videoPath;
         $video->save();
 
-        return redirect()->back()->with('success', 'Video uploaded successfully.');
+        return redirect()->back()->with('success', 'Video uploaded successfully but wait for the approval from Admin');
     }
 
     public function showVideos()
     {
         $videos = Video::orderByDesc('created_at')->get();
         $posts = Post::all();
+
+        $videos = $videos->where('status', 'approved');
+
 
         return view('videos', [
             'videos' => $videos,

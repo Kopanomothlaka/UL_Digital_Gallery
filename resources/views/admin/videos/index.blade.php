@@ -6,12 +6,8 @@
 
     <h1 class="mt-4">Videos</h1>
     <ol class="breadcrumb mb-4">
-        <a href="{{ route('admin.videos.index') }}">
-            Pending Videos
-        </a>
-
+        <li class="breadcrumb-item active">Videos</li>
     </ol>
-
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
