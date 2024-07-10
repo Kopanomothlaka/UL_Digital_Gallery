@@ -106,9 +106,39 @@
         background-color: #c62828; /* Slightly darker red on hover */
     }
 
+    .spinner-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(198, 170, 76);
+        z-index: 9999;
+    }
+
+    .spinner-container img {
+        justify-content: center;
+        text-align: center;
+
+    }
+
+    .spinner-grow {
+        margin-top: 20px;
+    }
+
 </style>
 
 <body>
+<div class="spinner-container">
+    <div class="spinner-grow" style="width: 7rem; height: 7rem; color: white;" role="status">
+        <span class="sr-only"></span>
+        <img src="/img/logo.png" alt="Logo" style="width: 90px;margin: 17px">
+
+    </div>
+</div>
 
 
 <nav class="navbar navbar-expand-lg py-1.5 sticky-top ">
@@ -367,6 +397,10 @@
 
 
 <script>
+    window.addEventListener('load', function () {
+        document.querySelector('.spinner-container').style.display = 'none';
+    });
+
     function previewImage(input) {
         var file = input.files[0];
         var reader = new FileReader();

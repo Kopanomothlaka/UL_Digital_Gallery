@@ -36,6 +36,8 @@
             <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
         </div>
     </form>
+
+
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
@@ -68,6 +70,10 @@
                     <a class="nav-link" href="{{ url('admin/dashboard') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Dashboard
+                    </a>
+                    <a class="nav-link" href="{{ url('admin/contact-submissions') }}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-envelope"></i></div>
+                        Mails
                     </a>
                     <div class="sb-sidenav-menu-heading">Addons</div>
                     <a class="nav-link" href="{{ url('admin/users') }}">

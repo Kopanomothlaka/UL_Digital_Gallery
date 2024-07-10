@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminProfileController;
@@ -151,12 +152,13 @@ Route::get('/admin/news/{id}/edit', [NewsController::class, 'edit'])->name('admi
 Route::put('/admin/news/{id}', [NewsController::class, 'update'])->name('admin.news.update'); // Update route
 Route::delete('/admin/news/{id}', [NewsController::class, 'destroy'])->name('admin.news.destroy'); // Delete route
 
+
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
 //ex
-
-
-
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/admin/contact-submissions', [ContactController::class, 'index'])->name('admin.contact_submissions');
+Route::delete('/admin/contact-submissions/{id}', [ContactController::class, 'destroy'])->name('admin.contact-submissions.destroy');
 
 
 

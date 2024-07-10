@@ -88,7 +88,6 @@
 
 <div class="row" id="contatti">
     <div class="container mt-5">
-
         <div class="row" style="height:550px;">
             <div class="col-md-6 maps">
                 <iframe
@@ -98,39 +97,45 @@
             </div>
             <div class="col-md-6 p-5">
                 <h2 class="text-uppercase mt-3 font-weight-bold text-white">CONTACT</h2>
-                <form action="">
+                @if(session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
+                <form action="{{ route('contact.store') }}" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <input type="text" class="form-control mt-2" placeholder="Name" required>
+                                <input type="text" name="name" class="form-control mt-2" placeholder="Name" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <input type="text" class="form-control mt-2" placeholder="Last Name" required>
+                                <input type="text" name="last_name" class="form-control mt-2" placeholder="Last Name"
+                                       required>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <input type="email" class="form-control mt-2" placeholder="Email" required>
+                                <input type="email" name="email" class="form-control mt-2" placeholder="Email" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <input type="number" class="form-control mt-2" placeholder="Phone number" required>
+                                <input type="number" name="phone" class="form-control mt-2" placeholder="Phone number"
+                                       required>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group mt-3">
-                                <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Message"
-                                          rows="3" required></textarea>
+                                <textarea name="message" class="form-control" placeholder="Message" rows="3"
+                                          required></textarea>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="invalidCheck2"
-                                           required>
+                                           name="terms" required>
                                     <label class="form-check-label" for="invalidCheck2">
                                         Accept terms and Conditions
                                     </label>
@@ -143,24 +148,18 @@
                     </div>
                 </form>
                 <div class="text-Blue">
-
-
                     <i class="fa fa-phone mt-3"></i> <a href="tel:+" style='color:#C8AB4D'>(+39) 123456</a><br>
                     <i class="fa fa-envelope mt-3"></i> <a href="#" style='color:#C8AB4D'>info@test.it</a><br>
                     <i class="fa fa-facebook mt-3"></i> <a href="#" style='color:#C8AB4D'>University of Limpopo</a><br>
                     <i class="fa fa-instagram mt-3"></i> <a href="#" style='color:#C8AB4D'>University of Limpopo</a><br>
                     <i class="fa fa-twitter mt-3"></i> <a href="#" style='color:#C8AB4D'>University of Limpopo</a><br>
                     <i class="fa fa-youtube mt-3"></i> <a href="#" style='color:#C8AB4D'>University of Limpopo</a><br>
-
-
                 </div>
-
             </div>
         </div>
     </div>
-
-
 </div>
+
 
 </div>
 

@@ -3,6 +3,45 @@
 @section('title' ,'Home')
 
 @section('content')
+    <style>
+        .spinner-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(198, 170, 76);
+            z-index: 9999;
+        }
+
+        .spinner-container img {
+            justify-content: center;
+            text-align: center;
+
+        }
+
+        .spinner-grow {
+            margin-top: 20px;
+        }
+
+    </style>
+    <script>
+        window.addEventListener('load', function () {
+            document.querySelector('.spinner-container').style.display = 'none';
+        });
+
+    </script>
+
+    <div class="spinner-container">
+        <div class="spinner-grow" style="width: 7rem; height: 7rem; color: white;" role="status">
+            <span class="sr-only"></span>
+            <img src="/img/logo.png" alt="Logo" style="width: 90px;margin: 17px">
+
+        </div>
+    </div>
 
     <div class="hero vh-100 d-flex align-items-center" id="home">
         <div class="container">
@@ -32,7 +71,8 @@
                     <h6 style="color:#C8AB4D;">stay updated</h6>
                     <h1 style="color:#C8AB4D;">News</h1>
                     <p> Stay informed with the latest news from the University of Limpopo, where groundbreaking
-                        research, academic achievements, campus updates, and community initiatives are brought to the
+                        research, academic achievements, campus updates, and community initiatives are brought to
+                        the
                         forefront. Our news section is a gateway to insightful articles, press releases, and
                         announcements that highlight the university's contributions to education, innovation, and
                         societal impact. Discover stories of excellence, progress, and collaboration that shape the
@@ -53,6 +93,8 @@
 
 
                 <div class="row mt-3">
+
+
                     @foreach($news as $single_news)
                         <div class="col-xs-12 col-sm-4 mb-4">
                             <div class="card h-100">
@@ -69,20 +111,18 @@
                                 <div class="card-body">
                                     <h4 class="card-title">
                                         <a href="{{ route('news.show', $single_news->id) }}">
-
                                             {{ Str::limit($single_news->title, 15) }}
                                         </a>
-
                                     </h4>
                                     <p class="card-text">{{ Str::limit($single_news->body, 98) }}</p>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="{{ route('news.show', $single_news->id) }}" class="btn btn-link btn-block"
+                                    <a href="{{ route('news.show', $single_news->id) }}"
+                                       class="btn btn-link btn-block"
                                        style="text-decoration: none; color: white;">Read More</a>
                                     <p><small
                                             class="text-muted">Published: {{ $single_news->date->format('M d, Y') }}</small>
                                     </p>
-
                                 </div>
                             </div>
                         </div>
@@ -95,7 +135,6 @@
 
     </section>
 
-   
 
     <section id="videos">
         <div class="container">
@@ -104,10 +143,13 @@
                 <div class="col-md-8 mx-auto text-center">
                     <h6 style="color:#C8AB4D;">Videos</h6>
                     <h1 style="color:#C8AB4D;">Our Videos</h1>
-                    <p> Explore the vibrant campus life and academic excellence at the University of Limpopo through our
-                        captivating videos. From insightful lectures and groundbreaking research to cultural events and
+                    <p> Explore the vibrant campus life and academic excellence at the University of Limpopo through
+                        our
+                        captivating videos. From insightful lectures and groundbreaking research to cultural events
+                        and
                         student activities, our videos showcase the diverse and dynamic spirit of our university
-                        community. Join us on a visual journey that highlights our commitment to education, innovation,
+                        community. Join us on a visual journey that highlights our commitment to education,
+                        innovation,
                         and the holistic development of our students. <span><a href="videos"
                                                                                style="text-decoration: underline; color:blue;">see all videos</a></span>
                     </p>
@@ -178,10 +220,6 @@
     </section>
 
 
-
-
-
-
     <footer>
 
         <div class="footer-bottom py-3">
@@ -199,7 +237,6 @@
             </div>
         </div>
 
-        </div>
 
     </footer>
 

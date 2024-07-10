@@ -109,36 +109,4 @@ class DashboardController extends Controller
     }
 
 
-    public function create()
-    {
-        return view('admin.news.create');
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'body' => 'required',
-            'author' => 'required|string|max:255',
-            'date' => 'required|date',
-        ]);
-
-        $news = new News();
-        $news->title = $request->title;
-
-        if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('photos', 'public');
-            $news->photo = $path;
-        }
-
-        $news->body = $request->body;
-        $news->author = $request->author;
-        $news->date = $request->date;
-        $news->save();
-
-        return redirect()->route('admin.news.create')->with('success', 'News created successfully.');
-    }
-
-
 }
