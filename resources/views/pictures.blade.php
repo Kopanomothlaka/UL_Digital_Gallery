@@ -20,7 +20,7 @@
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="/script/script.js"></script>
 
-    <link rel="stylesheet" href="/css/style.css">
+    <link href="{{ asset('/css/style.css') }}" rel="stylesheet"/>
     <link rel="icon" type="image/png" href="img/logo.png">
 </head>
 
@@ -114,9 +114,12 @@
 <nav class="navbar navbar-expand-lg py-1.5 sticky-top ">
     <div class="container-fluid">
 
-        <a href="welcome">
-            <img src="/img/logo.png" alt="Logo">
-        </a>
+        <div class="navvv">
+            <a href="welcome">
+                <img src="/img/logo.png" alt="Logo">
+            </a>
+
+        </div>
 
 
         <form class="form-inline my-2 my-lg-0" action="{{ route('search') }}" method="GET">
@@ -147,7 +150,7 @@
                         <a class="nav-link text-white" href="videos">Videos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="contact">Contact</a>
+                        <a class="nav-link text-white" href="#">Notifications</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
@@ -261,6 +264,7 @@
                             <div class="media mb-9" style="display: flex; align-items: center;">
                                 <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
                                      class="d-block ui-w-40 rounded-circle"
+                                     height="50px"
                                      alt="" style="margin-left:15px;" style="flex-shrink: 0;">
 
 
@@ -297,9 +301,9 @@
                                 @endauth
                             </div>
 
-                            <p style="margin-left:15px;"> {{ $post->text }}
+                            <p style="margin-left:15px;margin-top:19px;"> {{ $post->text }}
                             </p>
-                            <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid"
+                            <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid "
                                  style="width: 100%;"
                                  height="600px" alt="">
 

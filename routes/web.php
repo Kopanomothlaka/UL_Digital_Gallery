@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\ForgetPasswordManager;
@@ -27,13 +30,15 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/welcome', [WelcomeController::class, 'showWelcomePage'])->name('home');
 
-Route::get('/welcome', function () {
-    return view('welcome');
-})->name('home');
 Route::get('/UserHome', function () {
     return view('UserHome');
 })->name('UserHome');
+
+Route::get('/news', function () {
+    return view('news');
+});
 
 
 Route::get('/news', function () {
@@ -131,8 +136,24 @@ Route::prefix('admin')->group(function () {
     Route::post('/admin/videos/{video}/Vapprove', [DashboardController::class, 'Vapprove'])->name('admin.videos.approve');
     Route::post('/admin/videos/{video}/Vreject', [DashboardController::class, 'Vreject'])->name('admin.videos.reject');
 
+    //admin profile
+    Route::get('/admin/AdminProfile', [AdminProfileController::class, 'adminProfile'])->name('admin.AdminProfile');
+    Route::put('/admin/profile/update', [AdminProfileController::class, 'updateProfile'])->name('admin.profile.update');
+    Route::post('/admin/profile/change-password', [AdminProfileController::class, 'changePassword'])->name('admin.profile.changePassword');
+
 
 });
+//news
+Route::get('/admin/news/create', [NewsController::class, 'create'])->name('admin.news.create');
+Route::post('/admin/news', [NewsController::class, 'store'])->name('admin.news.store');
+Route::get('/admin/uploadedNews', [NewsController::class, 'uploaded'])->name('admin.news.uploadedNews');
+Route::get('/admin/news/{id}/edit', [NewsController::class, 'edit'])->name('admin.news.edit');
+Route::put('/admin/news/{id}', [NewsController::class, 'update'])->name('admin.news.update'); // Update route
+Route::delete('/admin/news/{id}', [NewsController::class, 'destroy'])->name('admin.news.destroy'); // Delete route
+
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
+//ex
 
 
 

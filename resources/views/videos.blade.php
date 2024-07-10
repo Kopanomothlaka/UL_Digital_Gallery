@@ -74,6 +74,20 @@
         .unlike-btn:hover {
             background-color: #c62828; /* Slightly darker red on hover */
         }
+
+        .video-container {
+            position: relative;
+            padding-top: 40.25%; /* 16:9 Aspect Ratio */
+            background-color: #000000;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 
@@ -81,9 +95,14 @@
 
 <nav class="navbar navbar-expand-lg py-1.5 sticky-top ">
     <div class="container-fluid">
-        <a href="welcome">
-            <img src="/img/logo.png" alt="Logo">
-        </a>
+
+        <div class="navvv">
+            <a href="welcome">
+                <img src="/img/logo.png" alt="Logo">
+            </a>
+
+
+        </div>
 
 
         <form class="form-inline my-2 my-lg-0" action="{{ route('video.search') }}" method="GET">
@@ -112,7 +131,7 @@
                         <a class="nav-link text-white" href="videos">Videos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="contact">Contact</a>
+                        <a class="nav-link text-white" href="#">Notifications</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
@@ -210,11 +229,15 @@
         @foreach($videos as $video)
             <div class="row">
                 <div class="col-lg-7 mx-auto">
-                    <div class="card mb-4 shadow p-3 mb-1 bg-white rounded" style="margin :15px;">
+                    <div class="card mb-4 shadow p-3 mb-1 bg-white rounded" style="margin :13px;">
                         <div class="media mb-9" style="display: flex; align-items: center;">
+
                             <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
                                  class="d-block ui-w-40 rounded-circle"
+                                 height="50px"
                                  alt="" style="margin-left:15px;" style="flex-shrink: 0;">
+
+
                             <div class="media-body ml-3">
                                 <h6 style="margin-left:15px;"> {{ $video->user->name }}</h6>
                                 <div class="text-muted small" style="margin-left:15px;">
@@ -244,9 +267,12 @@
                             @endauth
                         </div>
                         <p style="margin-left:15px;">{{ $video->title }}</p>
-                        <video src="{{ asset('storage/' . $video->video_path) }}" class="img-fluid" style="width: 100%;"
-                               height="600px" controls
-                               autoplay loop alt="Video"></video>
+
+                        <div class="ratio ratio-16x9" style="background-color: black">
+                            <video src="{{ asset('storage/' . $video->video_path) }}" title="video" autoplay loop
+                                   controls></video>
+                        </div>
+
                         <div class="card-body">
                             <!-- Add any additional content related to the video here -->
                         </div>

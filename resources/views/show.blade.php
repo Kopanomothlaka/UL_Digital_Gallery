@@ -1,4 +1,5 @@
 @extends('layout')
+
 @section('content')
 
     <section class="h-100 gradient-custom-2">

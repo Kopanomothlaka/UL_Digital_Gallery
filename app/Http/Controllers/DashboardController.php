@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Video;
@@ -52,7 +53,7 @@ class DashboardController extends Controller
     public function AdminPictures()
     {
         // Fetch the posts from the database
-        
+
         $posts = Post::orderBy('created_at', 'desc')->get();
 
         // Return the view with the posts variable
@@ -105,6 +106,38 @@ class DashboardController extends Controller
     {
         $video->update(['status' => 'rejected'])->orderBy('created_at', 'desc');
         return redirect()->route('admin.AdminVideos')->with('success', 'Video rejected successfully.');
+    }
+
+
+    public function create()
+    {
+        return view('admin.news.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'body' => 'required',
+            'author' => 'required|string|max:255',
+            'date' => 'required|date',
+        ]);
+
+        $news = new News();
+        $news->title = $request->title;
+
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('photos', 'public');
+            $news->photo = $path;
+        }
+
+        $news->body = $request->body;
+        $news->author = $request->author;
+        $news->date = $request->date;
+        $news->save();
+
+        return redirect()->route('admin.news.create')->with('success', 'News created successfully.');
     }
 
 

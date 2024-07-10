@@ -44,52 +44,49 @@
 
 
             <div class="row g-1">
-                <div class="row g-4">
-                    <h4 class="mt-5 mb-20" style="color:#C8AB4D; margin-bottom: 0;">Recent News</h4>
+                <div class="row ">
+                    <h4 style="color:#C8AB4D; ">Recent News </h4>
+                    <a href="news">more</a>
 
 
                 </div>
 
 
-                <div class="col-20 col-md-4">
+                <div class="row mt-3">
+                    @foreach($news as $single_news)
+                        <div class="col-xs-12 col-sm-4 mb-4">
+                            <div class="card h-100">
+                                <div class="news">
+                                    @if($single_news->photo)
+                                        <img class="card-img-top" height="400px" width="400px"
+                                             src="{{ asset('storage/' . $single_news->photo) }}"
+                                             alt="Card image cap">
+                                    @else
+                                        <img class="card-img-top" src="{{ asset('/img/default_image.jpg') }}"
+                                             alt="Default Image">
+                                    @endif
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="{{ route('news.show', $single_news->id) }}">
 
-                    <div class="service card-effect">
+                                            {{ Str::limit($single_news->title, 15) }}
+                                        </a>
 
-                        <img class="card-img-top" src="/img/strike.png" alt="Card image cap" style="height: 300px;">
-                        <h5 class="mt-4 mb-2">Students disrupt classes at University of Limpopo</h5>
-                        <P>In a surprising turn of events at the University of Limpopo on Tuesday morning, students
-                            reportedly took to the streets.......
-                        </P>
+                                    </h4>
+                                    <p class="card-text">{{ Str::limit($single_news->body, 98) }}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="{{ route('news.show', $single_news->id) }}" class="btn btn-link btn-block"
+                                       style="text-decoration: none; color: white;">Read More</a>
+                                    <p><small
+                                            class="text-muted">Published: {{ $single_news->date->format('M d, Y') }}</small>
+                                    </p>
 
-                        <a href="2020-2024" class="btn btn-primary w-100 mt-3">READ MORE</a>
-                    </div>
-
-                </div>
-                <div class="col-20 col-md-4">
-                    <div class="service card-effect">
-
-                        <img class="card-img-top" src="/img/bg_image.png" alt="Card image cap" style="height: 300px;">
-                        <h5 class="mt-4 mb-2">Students disrupt classes at University of Limpopo</h5>
-                        <P>In a surprising turn of events at the University of Limpopo on Tuesday morning, students
-                            reportedly took to the streets.......
-                        </P>
-
-                        <a href="2020-2024" class="btn btn-primary w-100 mt-3">READ MORE</a>
-                    </div>
-
-                </div>
-                <div class="col-20 col-md-4">
-                    <div class="service card-effect">
-
-                        <img class="card-img-top" src="/img/strike.png" alt="Card image cap" style="height: 300px;">
-                        <h5 class="mt-4 mb-2">Students disrupt classes at University of Limpopo</h5>
-                        <P>In a surprising turn of events at the University of Limpopo on Tuesday morning, students
-                            reportedly took to the streets.......
-                        </P>
-
-                        <a href="2020-2024" class="btn btn-primary w-100 mt-3">READ MORE</a>
-                    </div>
-
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
 
 
@@ -98,93 +95,7 @@
 
     </section>
 
-    <section id="gallery">
-        <div class="container">
-            <div class="row mb-4">
-
-                <div class="col-md-8 mx-auto text-center">
-                    <h6 style="color:#C8AB4D;">Gallery</h6>
-                    <h1 style="color:#C8AB4D;">Our Gallery</h1>
-                    <p> Step into the captivating world of the University of Limpopo through our gallery, where each
-                        image is a window into our vibrant campus life, academic excellence, and cultural diversity.
-                        From stunning landscapes that reflect the natural beauty of our surroundings to engaging
-                        snapshots of student activities, events, and facilities, our gallery showcases the essence of
-                        our university experience.<span><a href="pictures"
-                                                           style="text-decoration: underline; color:blue;">View all pictures</a></span>
-
-                    </p>
-                </div>
-
-
-            </div>
-            <div class="row g-3">
-
-                <div class="row g-1">
-                    <h4 class="mt-5 mb-20" style="color:#C8AB4D; margin-bottom: 0;">Recent Pictures</h4>
-
-
-                </div>
-                <div class="col-1g-4 col-sm-6">
-
-                    <div class="gallery">
-                        <figure class="figure">
-                            <img src="/img/bg_image.png" class="figure-img img-fluid rounded"
-                                 alt="A generic square placeholder image with rounded corners in a figure.">
-                            <figcaption class="figure-caption">The art of seeing beauty in everything.(kopano
-                                Mothlaka)
-                            </figcaption>
-                        </figure>
-
-
-                    </div>
-
-
-                </div>
-                <div class="col-1g-4 col-sm-6">
-                    <div class="gallery">
-                        <figure class="figure">
-                            <img src="/img/bg_image.png" class="figure-img img-fluid rounded"
-                                 alt="A generic square placeholder image with rounded corners in a figure.">
-                            <figcaption class="figure-caption">Creating memories, one click at a time.</figcaption>
-                        </figure>
-
-
-                    </div>
-
-                </div>
-                <div class="col-1g-4 col-sm-6">
-                    <div class="gallery">
-                        <figure class="figure">
-                            <img src="/img/bg_image.png" class="figure-img img-fluid rounded"
-                                 alt="A generic square placeholder image with rounded corners in a figure.">
-                            <figcaption class="figure-caption">Exploring the world one snapshot at a time.</figcaption>
-                        </figure>
-
-
-                    </div>
-
-                </div>
-                <div class="col-1g-4 col-sm-6">
-                    <div class="gallery">
-                        <figure class="figure">
-                            <img src="/img/bg_image.png" class="figure-img img-fluid rounded"
-                                 alt="A generic square placeholder image with rounded corners in a figure.">
-                            <figcaption class="figure-caption">A caption for the above image.</figcaption>
-                        </figure>
-
-
-                    </div>
-
-
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-    </section>
+   
 
     <section id="videos">
         <div class="container">

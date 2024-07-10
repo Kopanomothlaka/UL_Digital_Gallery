@@ -1,8 +1,14 @@
 <nav class="navbar navbar-expand-lg py-1.5 sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand text-white" href="welcome">
-            <img src="/img/logo.png" alt="">
-            Digital Gallery
+
+
+            <div class="navvv">
+                <img src="/img/logo.png" alt="">
+                Digital Gallery
+
+            </div>
+
         </a>
 
 
@@ -12,6 +18,8 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
+
+
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link text-white" href="welcome">Home</a>
@@ -26,9 +34,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="videos">Videos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="contact">Contact</a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">Notifications</a>
                     </li>

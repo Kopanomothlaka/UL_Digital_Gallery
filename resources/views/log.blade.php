@@ -6,7 +6,7 @@
     <div class="container mt-5 pt-5">
         <div class="row">
             <div class="col-12 col-sm-7 col-md-5 m-auto">
-                <div class="card border-0 shadow">
+                <div class="card border-1 shadow">
                     <div class="card-body text-centre">
                         <div class="d-flex justify-content-center">
                             <img src="/img/logo.png" alt="" class="img-fluid">
