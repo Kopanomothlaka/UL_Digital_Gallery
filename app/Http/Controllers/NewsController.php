@@ -86,4 +86,10 @@ class NewsController extends Controller
         $news = News::findOrFail($id);
         return view('admin.news.more-info-page', compact('news'));
     }
+
+    public function showWelcomePage()
+    {
+        $news = News::all(); // Fetch news data from the database
+        return view('welcome', compact('news')); // Pass the news data to the view
+    }
 }

@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "bootstrap": "^5.3.3",
-        "startbootstrap-sb-admin-2": "^3.3.7"
+        "startbootstrap-sb-admin-2": "^3.3.7",
+        "tributejs": "^5.1.3"
     }
 }

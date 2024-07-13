@@ -74,7 +74,7 @@
 
 
 <main>
-   
+
     <div class="container-fluid px-0 ">
         @yield('content')
     </div>

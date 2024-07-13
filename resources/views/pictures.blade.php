@@ -129,6 +129,12 @@
         margin-top: 20px;
     }
 
+
+    .highlight {
+        background-color: #ffff00; /* Yellow highlight */
+    }
+
+
 </style>
 
 <body>
@@ -228,10 +234,12 @@
             <form id="postForm" action="{{ route('post.timeline') }}" method="POST" enctype="multipart/form-data"
                   class="post-to-timeline shadow p-3 mb-3 bg-white rounded" style="margin-top: 20px;">
                 @csrf
-                <div class="input-group">
+                <div class="input-group" style="position: relative;">
+                    <div id="highlightedContent" class="form-control"
+                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; color: transparent; white-space: pre-wrap; pointer-events: none; z-index: 1;"></div>
                     <textarea class="form-control" id="postContent"
-                              style="height: 70px; margin-bottom: 10px; resize: none;" name="text"
-                              placeholder="What's on your mind..."></textarea>
+                              style="height: 70px; margin-bottom: 10px; resize: none; background: none; z-index: 2; position: relative;"
+                              name="text" placeholder="What's on your mind..."></textarea>
                     <div class="input-group-append p-3">
                         <label for="image-upload" class="btn btn-sm btn-default">
                             <i class="fa fa-camera" style="color: white;"></i>
@@ -242,6 +250,7 @@
                     </div>
                 </div>
             </form>
+
             <div class="mt-1">
                 @if($errors->any())
                     <div class="col-12">
@@ -445,7 +454,7 @@
         @endguest
     });
 
-    var tribute = new Tribute({
+    const tribute = new Tribute({
         trigger: '@',
         values: function (text, cb) {
             fetch('/api/users?query=' + text).then(res => res.json()).then(data => cb(data.map(user => ({
@@ -454,30 +463,48 @@
             }))));
         },
         selectTemplate: function (item) {
-            return item.original.value; // Return the user's name without "@" symbol
+            return '@' + item.original.value; // Return the user's name with "@" symbol
         },
         menuItemLimit: 10 // Limit the number of suggestions
     });
 
     tribute.attach(document.getElementById('postContent'));
 
-    // Event handler to remove "@" and highlight selected user's name
-    document.getElementById('postContent').addEventListener('tribute-replaced',
-        function (e) {
-            const selectedText = e.detail.item.original.key; // Get the selected user's name
-            const currentText = this.value;
-            const replacedText = currentText.replace('@' + selectedText, selectedText);
-            this.value = replacedText;
+    // Synchronize textarea content with the overlay div
+    document.getElementById('postContent').addEventListener('input', function () {
+        synchronizeHighlighting(this);
+    });
 
-            // Highlight the selected user's name
-            const startIndex = replacedText.lastIndexOf(selectedText);
-            const endIndex = startIndex + selectedText.length;
-            this.setSelectionRange(startIndex, endIndex);
-            this.focus();
-            document.execCommand('hiliteColor', false, '#ffff00'); // Yellow highlight
-            window.getSelection().collapseToEnd(); // Collapse the selection to the end
+    document.getElementById('postContent').addEventListener('tribute-replaced', function (e) {
+        synchronizeHighlighting(this);
+    });
+
+    // Function to synchronize highlighting
+    function synchronizeHighlighting(textarea) {
+        const text = textarea.value;
+        const highlightedContent = text.replace(/(@\w+)/g, '<span style="background-color: #ffff00;">$1</span>');
+        document.getElementById('highlightedContent').innerHTML = highlightedContent.replace(/\n/g, '<br>');
+    }
+
+    // Initial synchronization
+    synchronizeHighlighting(document.getElementById('postContent'));
+
+    // Add an input event listener to remove the highlighting span if the text changes
+    document.getElementById('postContent').addEventListener('input', function () {
+        this.innerHTML = this.value; // Remove any HTML and keep only plain text
+    });
+
+    // Add an input event listener to remove the highlighting span if the text changes
+    document.getElementById('postContent').addEventListener('input', function () {
+        const spans = this.querySelectorAll('span');
+        spans.forEach(span => {
+            const parent = span.parentNode;
+            while (span.firstChild) {
+                parent.insertBefore(span.firstChild, span);
+            }
+            parent.removeChild(span);
         });
-
+    });
 
     document.addEventListener('DOMContentLoaded', function () {
         // Get the textarea element

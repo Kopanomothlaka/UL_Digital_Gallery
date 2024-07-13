@@ -27,13 +27,32 @@
             margin-top: 20px;
         }
 
+
     </style>
     <script>
+
+        var botmanWidget = {
+            frameEndpoint: '/botman/chat',
+            title: "UL CHATBOT",
+            bubbleBackground: "#c6aa4c",
+            mainColor: "#c6aa4c",
+            aboutText: 'Powered By UL',
+            introMessage: 'Hi and welcome to  UL chatbot , type HELP ',
+
+
+        };
+
+
         window.addEventListener('load', function () {
             document.querySelector('.spinner-container').style.display = 'none';
         });
 
     </script>
+
+
+    <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
+
+
 
     <div class="spinner-container">
         <div class="spinner-grow" style="width: 7rem; height: 7rem; color: white;" role="status">

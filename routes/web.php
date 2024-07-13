@@ -32,6 +32,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/welcome', [WelcomeController::class, 'showWelcomePage'])->name('home');
+Route::get('/', [NewsController::class, 'showWelcomePage']);
 
 Route::get('/UserHome', function () {
     return view('UserHome');
@@ -161,4 +162,5 @@ Route::get('/admin/contact-submissions', [ContactController::class, 'index'])->n
 Route::delete('/admin/contact-submissions/{id}', [ContactController::class, 'destroy'])->name('admin.contact-submissions.destroy');
 
 
-
+//botman
+Route::match(['get', 'post'], '/botman', 'App\Http\Controllers\BotManController@handle');
