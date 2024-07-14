@@ -169,4 +169,7 @@ Route::match(['get', 'post'], '/botman', 'App\Http\Controllers\BotManController@
 Route::get('/notifications', [App\Http\Controllers\NotificationsController::class, 'index'])
     ->name('notifications.index')
     ->middleware('auth');
+Route::delete('/mentions/{id}', [NotificationsController::class, 'deleteMention'])->name('delete-mention');
+
+
 

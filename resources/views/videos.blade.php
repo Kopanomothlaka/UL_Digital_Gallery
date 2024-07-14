@@ -17,6 +17,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="/css/style.css">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
     <link rel="icon" type="image/png" href="img/logo.png">
     <style>
         .nav-link.dropdown-toggle {
@@ -111,6 +113,23 @@
         .spinner-grow {
             margin-top: 20px;
         }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25em 0.4em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.25rem;
+        }
+
+        .badge-danger {
+            color: #fff;
+            background-color: #dc3545;
+        }
     </style>
 </head>
 
@@ -161,8 +180,16 @@
                         <a class="nav-link text-white" href="videos">Videos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Notifications</a>
+                        <a class="nav-link text-white" href="{{ route('notifications.index') }}">
+                            Notifications
+                            @isset($mentionsCount)
+                                @if ($mentionsCount > 0)
+                                    <span class="badge badge-pill badge-danger">{{ $mentionsCount }}</span>
+                                @endif
+                            @endisset
+                        </a>
                     </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
@@ -172,6 +199,8 @@
 
                             </i>
                         </a>
+
+
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{ route('profile.show') }}">Profile</a></li>
                             <li>

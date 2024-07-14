@@ -38,8 +38,18 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('notifications.index') }}">Notifications</a>
+                        <a class="nav-link text-white" href="{{ route('notifications.index') }}">
+                            Notifications
+                            @isset($mentionsCount)
+                                @if ($mentionsCount > 0)
+                                    <span class="badge badge-pill badge-danger">{{ $mentionsCount }}</span>
+                                @endif
+                            @endisset
+                        </a>
                     </li>
+
+
+
 
 
                     <li class="nav-item dropdown">
