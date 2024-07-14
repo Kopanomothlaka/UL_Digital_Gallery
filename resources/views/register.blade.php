@@ -36,7 +36,7 @@
                                        class="form-control rounded-pill my-1 py-2 custom-input"/>
 
                                 <label for="username">Phone number</label>
-                                <input type="phone" name="phone"
+                                <input type="tel" name="phone"
                                        class="form-control rounded-pill my-1 py-2 custom-input"/>
 
 
