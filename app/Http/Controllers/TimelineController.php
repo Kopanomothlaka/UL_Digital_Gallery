@@ -35,9 +35,9 @@ class TimelineController extends Controller
         preg_match_all('/@([\w\s]+)/', $post->text, $matches);
         $mentionedUsers = User::whereIn('name', $matches[1])->get();
 
-
         // Attach mentions to post
         $post->mentions()->attach($mentionedUsers->pluck('id'));
+
         // Notify mentioned users
         foreach ($mentionedUsers as $user) {
             $user->notify(new UserMentioned($user, $post));

@@ -15,7 +15,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VideoSearchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\NotificationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -164,3 +164,9 @@ Route::delete('/admin/contact-submissions/{id}', [ContactController::class, 'des
 
 //botman
 Route::match(['get', 'post'], '/botman', 'App\Http\Controllers\BotManController@handle');
+
+//notification
+Route::get('/notifications', [App\Http\Controllers\NotificationsController::class, 'index'])
+    ->name('notifications.index')
+    ->middleware('auth');
+
