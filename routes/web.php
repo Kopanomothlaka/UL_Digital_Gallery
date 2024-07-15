@@ -5,6 +5,8 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\WelcomeController;
+use http\Client\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\ForgetPasswordManager;
@@ -170,6 +172,7 @@ Route::get('/notifications', [App\Http\Controllers\NotificationsController::clas
     ->name('notifications.index')
     ->middleware('auth');
 Route::delete('/mentions/{id}', [NotificationsController::class, 'deleteMention'])->name('delete-mention');
+
 
 
 

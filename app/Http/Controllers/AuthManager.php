@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -54,7 +55,8 @@ class AuthManager extends Controller
             'name' => 'required',
             'phone' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed'
+            'password' => 'required|min:6|confirmed',
+            // Ensure email_verified_at is initially null
         ]);
         $data['name'] = $request->name;
         $data['phone'] = $request->phone;
@@ -66,8 +68,12 @@ class AuthManager extends Controller
 
         }
 
-        return redirect(route('log'))->with("success", "Registration success , now log in");
+        event(new Registered($user)); // Trigger Laravel's built-in Registered event
 
+        // Send email verification notification
+        $user->sendEmailVerificationNotification();
+
+        return redirect()->route('log')->with("success", "Registration successful. Please check your email for verification.");
     }
 
     function logout()
