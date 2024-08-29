@@ -54,7 +54,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table id="datatablesSimple" class="table table-bordered">
+                <table id="datatablesSimple" class="table ">
                     <thead>
                     <tr>
                         <th>Name</th>
@@ -74,8 +74,11 @@
                             <td>{{ $user->posts->count() }}</td>
                             <td>
 
-                                <a onclick="return confirm('Are you sure you want to delete this user?')"
-                                   href="{{ route('admin.delete.user', $user->id) }}" class="btn btn-danger btn-sm">Delete</a>
+                                <form action="{{ route('admin.delete.user', $user->id) }}" method="POST"
+                                      onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
                             </td>
 
                         </tr>

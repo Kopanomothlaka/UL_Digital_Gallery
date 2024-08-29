@@ -80,6 +80,10 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Users
                     </a>
+                    <a class="nav-link" href="{{ url('admin/register') }}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-user-tie"></i></div>
+                        Admin
+                    </a>
                     <a class="nav-link" href="{{ url('admin/AdminPictures') }}">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-image"></i></div>
                         Pictures

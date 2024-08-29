@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\News;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
@@ -81,6 +83,34 @@ class DashboardController extends Controller
         return redirect()->route('admin.AdminPictures')->with('success', 'Post approved successfully.');
     }
 
+    public function update(Request $request, $id)
+    {
+        // Validate incoming request data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'nullable|string|min:8|confirmed', // confirmed ensures password_confirmation field matches
+        ]);
+
+        // Find the admin record by ID
+        $admin = Admin::findOrFail($id);
+
+        // Update admin details
+        $admin->name = $validatedData['name'];
+        $admin->email = $validatedData['email'];
+
+        // Check if a new password is provided
+        if ($request->filled('password')) {
+            $admin->password = Hash::make($validatedData['password']);
+        }
+
+        // Save the changes
+        $admin->save();
+
+        // Redirect back or return a response as needed
+        return redirect()->route('admin.AdminList')->with('success', 'Admin details updated successfully');
+    }
+
     public function rejectPost(Post $post)
     {
         $post->update(['status' => 'rejected']);
@@ -95,7 +125,6 @@ class DashboardController extends Controller
         return view('admin.videos.index', compact('videos'));
     }
 
-
     public function Vapprove(Video $video)
     {
         $video->update(['status' => 'approved']);
@@ -104,8 +133,33 @@ class DashboardController extends Controller
 
     public function Vreject(Video $video)
     {
-        $video->update(['status' => 'rejected'])->orderBy('created_at', 'desc');
+        $video->update(['status' => 'rejected']);
         return redirect()->route('admin.AdminVideos')->with('success', 'Video rejected successfully.');
+    }
+
+    public function showAdminList()
+    {
+        $admins = Admin::all(); // Retrieve all admins from the database
+        return view('admin.AdminList', compact('admins')); // Pass the data to the view
+    }
+
+    public function destroy($id)
+    {
+        $admin = Admin::findOrFail($id); // Find the admin by ID
+        $admin->delete(); // Delete the admin
+
+        return redirect()->route('admin.AdminList')->with('success', 'Admin deleted successfully');
+    }
+
+    public function adminProfile()
+    {
+
+        $admin = Auth::guard('admins')->user(); // Retrieve authenticated admin user
+
+        return view('admin.profile.AdminProfile', [
+            'admin' => $admin,
+
+        ]);
     }
 
 

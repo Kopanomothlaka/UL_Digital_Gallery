@@ -23,4 +23,9 @@ class Video extends Model
         return $this->hasMany(Like::class);
     }
 
+    public function mentions()
+    {
+        return $this->belongsToMany(User::class, 'video_user');
+    }
+
 }

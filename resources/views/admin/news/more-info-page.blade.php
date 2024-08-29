@@ -132,9 +132,12 @@
 
     </div>
 </div>
-<div class="text-center mb-5">
+<div class="text-center mb-5 col-lg-7 mx-auto">
     <img src="{{ asset('/img/logo.png') }}" class="img-fluid" alt="Logo"/>
     <h1 class="display-4">University Of Limpopo News</h1>
+</div>
+<div class="text mb-5 col-lg-7 mx-auto">
+
 
     <div class="container mt-5">
         <h1 class="mb-3 font-weight-bold">{{ $news->title }}</h1>

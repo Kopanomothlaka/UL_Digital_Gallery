@@ -33,7 +33,7 @@ class TimelineController extends Controller
 
         // Extract mentions from post text
         preg_match_all('/@([\w\s]+)/', $post->text, $matches);
-        $mentionedUsers = User::whereIn('name', $matches[1])->get();
+        $mentionedUsers = User::whereIn('name', array_map('trim', $matches[1]))->get();
 
         // Attach mentions to post
         $post->mentions()->attach($mentionedUsers->pluck('id'));

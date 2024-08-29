@@ -11,7 +11,7 @@
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
             <div class="table-responsive">
-                <table id="datatablesSimple" class="table table-bordered">
+                <table id="datatablesSimple" class="table">
                     <thead>
                     <tr>
                         <th>Name</th>

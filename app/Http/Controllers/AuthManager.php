@@ -70,10 +70,8 @@ class AuthManager extends Controller
 
         event(new Registered($user)); // Trigger Laravel's built-in Registered event
 
-        // Send email verification notification
-        $user->sendEmailVerificationNotification();
 
-        return redirect()->route('log')->with("success", "Registration successful. Please check your email for verification.");
+        return redirect()->route('log')->with("success", "Registration successful");
     }
 
     function logout()

@@ -7,22 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>UL Digital Gallery</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/tributejs@5.1.3/dist/tribute.css">
-    <script src="https://unpkg.com/tributejs@5.1.3/dist/tribute.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-            crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
 
@@ -306,20 +292,26 @@
                 </div>
             </div>
         </div>
+
+
         <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;"> <!-- Set custom max-width -->
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <img id="modal-image" src="#" alt="Preview Image" style="max-width: 100%; max-height: 90vh;">
+                        <img id="modal-image" src="#" alt="Preview Image"
+                             style="width: 100%; height: auto; object-fit: contain;">
                     </div>
                 </div>
             </div>
         </div>
+
+
     </div>
+
 </div>
 
 
@@ -338,8 +330,7 @@
                                 <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
                                      class="d-block ui-w-40 rounded-circle"
                                      height="50px"
-                                     alt="" style="margin-left:15px;" style="flex-shrink: 0;">
-
+                                     alt="" style="margin-left:15px; flex-shrink: 0;">
 
                                 <div class="media-body ml-3">
                                     <h6 style="margin-left:15px;"> {{ $post->user->name }}</h6>
@@ -349,36 +340,40 @@
                                 </div>
 
                                 @auth
-                                    <div class="nav-item dropdown"
-                                         style="margin-left: auto; border-radius: 5px; padding: 5px;">
-                                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                                           data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-h"></i>
-                                        </a>
+                                    @if (auth()->user()->id === $post->user_id)
+                                        <div class="nav-item dropdown"
+                                             style="margin-left: auto; border-radius: 5px; padding: 5px;">
 
-                                        <div class="dropdown-menu dropdown-menu-left"
-                                             style="background-color: #ffffff; color: #000000;"
-                                             aria-labelledby="navbarDropdown">
+                                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
+                                               role="button"
+                                               data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-h"></i>
+                                            </a>
 
-                                            <a class="dropdown-item"
-                                               href="{{ route('posts.delete', ['id' => $post->id]) }}"><i
-                                                    class="fas fa-trash-alt"></i> Delete</a>
+                                            <div class="dropdown-menu dropdown-menu-left"
+                                                 style="background-color: #ffffff; color: #000000;"
+                                                 aria-labelledby="navbarDropdown">
 
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                               data-bs-target="#editCaptionModal-{{ $post->id }}"><i
-                                                    class="fas fa-edit"></i> Edit</a>
+                                                <a class="dropdown-item"
+                                                   href="{{ route('posts.delete', ['id' => $post->id]) }}">
+                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                </a>
+
+                                                <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                   data-bs-target="#editCaptionModal-{{ $post->id }}">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </a>
+
+                                            </div>
 
                                         </div>
-
-                                    </div>
+                                    @endif
                                 @endauth
                             </div>
 
-                            <p style="margin-left:15px;margin-top:19px;"> {{ $post->text }}
-                            </p>
-                            <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid "
-                                 style="width: 100%;"
-                                 height="600px" alt="">
+                            <p style="margin-left:15px;margin-top:19px;"> {{ $post->text }}</p>
+                            <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid"
+                                 style="width: 100%;" height="600px" alt="">
 
                             <div class="card-body"></div>
 
@@ -407,36 +402,48 @@
                 </div>
 
                 <!-- Edit Caption Modal -->
-                <div class="modal fade" id="editCaptionModal-{{ $post->id }}" tabindex="-1"
-                     aria-labelledby="editCaptionModalLabel-{{ $post->id }}" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editCaptionModalLabel-{{ $post->id }}">Edit Caption</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{ route('posts.updateCaption', $post->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="mb-5">
-                                        <label for="caption-{{ $post->id }}" class="form-label">Caption</label>
-                                        <textarea type="text" class="form-control" id="caption-{{ $post->id }}"
-                                                  name="caption">{{ $post->text }}</textarea>
-
-                                        <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid"
-                                             style="width: 100%; margin-top: 10px" height="600px" alt="">
+                @auth
+                    @if (auth()->user()->id === $post->user_id)
+                        <div class="modal fade" id="editCaptionModal-{{ $post->id }}" tabindex="-1"
+                             aria-labelledby="editCaptionModalLabel-{{ $post->id }}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editCaptionModalLabel-{{ $post->id }}">Edit
+                                            Caption</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                </form>
+                                    <div class="modal-body">
+                                        <form action="{{ route('posts.updateCaption', $post->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="mb-5">
+                                                <label for="caption-{{ $post->id }}" class="form-label">Caption</label>
+                                                <textarea type="text" class="form-control" id="caption-{{ $post->id }}"
+                                                          name="caption">{{ $post->text }}</textarea>
+
+                                                <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid"
+                                                     style="width: 100%; margin-top: 10px" height="600px" alt="">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-        @endforeach
+                    @endif
+                @endauth
+
+            @endforeach
+        </ul>
     @endif
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+<script src="https://unpkg.com/tributejs@5.1.3/dist/tribute.js"></script>
 
 
 <script>
@@ -459,6 +466,7 @@
             var modal = new bootstrap.Modal(document.getElementById('imageModal'));
             modal.show();
         };
+
 
         reader.readAsDataURL(file);
     }

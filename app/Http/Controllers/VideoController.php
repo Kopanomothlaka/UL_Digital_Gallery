@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
+use App\Notifications\UserMentioned;
+use App\Notifications\UserVideoMentioned;
 use Illuminate\Http\Request;
 use App\Models\Video;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +20,7 @@ class VideoController extends Controller
         }
         $request->validate([
             'title' => 'required|string',
-            'video' => 'required|mimes:mp4,mov,avi,wmv|max:9000000000000', // Adjust max file size as needed
+            'video' => 'required|mimes:mp4,mov,avi,wmv|max:999999999999', // Adjust max file size as needed
         ]);
 
         $videoPath = $request->file('video')->store('videos', 'public');
@@ -27,6 +30,18 @@ class VideoController extends Controller
         $video->title = $request->title;
         $video->video_path = $videoPath;
         $video->save();
+
+        // Extract mentions from title
+        preg_match_all('/@([\w\s]+)/', $video->title, $matches);
+        $mentionedUsers = User::whereIn('name', array_map('trim', $matches[1]))->get();
+
+        // Attach mentions to video
+        $video->mentions()->attach($mentionedUsers->pluck('id'));
+
+        // Notify mentioned users
+        foreach ($mentionedUsers as $user) {
+            $user->notify(new UserVideoMentioned($user, $video));
+        }
 
         return redirect()->back()->with('success', 'Video uploaded successfully but wait for the approval from Admin');
     }

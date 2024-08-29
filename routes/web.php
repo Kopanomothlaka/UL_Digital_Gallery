@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\WelcomeController;
 use http\Client\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\ForgetPasswordManager;
@@ -126,6 +127,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
     Route::get('/users', [DashboardController::class, 'users'])->name('admin.users');
     Route::post('/block-user/{id}', [DashboardController::class, 'blockUser'])->name('admin.block.user');
+
     Route::post('/delete-user/{id}', [DashboardController::class, 'deleteUser'])->name('admin.delete.user');
 
 
@@ -139,14 +141,25 @@ Route::prefix('admin')->group(function () {
     Route::get('/admin/videos', [DashboardController::class, 'showPendingVideos'])->name('admin.videos.index');
     Route::post('/admin/videos/{video}/Vapprove', [DashboardController::class, 'Vapprove'])->name('admin.videos.approve');
     Route::post('/admin/videos/{video}/Vreject', [DashboardController::class, 'Vreject'])->name('admin.videos.reject');
+    //admin list
+
 
     //admin profile
-    Route::get('/admin/AdminProfile', [AdminProfileController::class, 'adminProfile'])->name('admin.AdminProfile');
-    Route::put('/admin/profile/update', [AdminProfileController::class, 'updateProfile'])->name('admin.profile.update');
-    Route::post('/admin/profile/change-password', [AdminProfileController::class, 'changePassword'])->name('admin.profile.changePassword');
+    Route::get('/admin/AdminProfile', [DashboardController::class, 'adminProfile'])->name('admin.AdminProfile');
+    Route::put('profile', [DashboardController::class, 'updateP'])->name('admin.profile.update');
+    Route::put('password', [DashboardController::class, 'updatePassword'])->name('admin.password.update');
 
 
 });
+
+Route::get('/admin/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin.register');
+Route::post('/admin/register', [AdminAuthController::class, 'register']);
+//admins
+Route::get('/admin/AdminList', [DashboardController::class, 'showAdminList'])->name('admin.AdminList');
+Route::delete('/admin/{id}', [DashboardController::class, 'destroy'])->name('admin.destroy');
+Route::put('/admin/{id}', [DashboardController::class, 'update'])->name('admin.update');
+
+
 //news
 Route::get('/admin/news/create', [NewsController::class, 'create'])->name('admin.news.create');
 Route::post('/admin/news', [NewsController::class, 'store'])->name('admin.news.store');
@@ -172,6 +185,7 @@ Route::get('/notifications', [App\Http\Controllers\NotificationsController::clas
     ->name('notifications.index')
     ->middleware('auth');
 Route::delete('/mentions/{id}', [NotificationsController::class, 'deleteMention'])->name('delete-mention');
+
 
 
 

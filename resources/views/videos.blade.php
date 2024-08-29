@@ -9,7 +9,9 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tributejs/5.1.3/tribute.css">
+    <!-- Add Tribute.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tributejs/5.1.3/tribute.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -239,7 +241,7 @@
                   class="d-flex ms-auto shadow p-3 mb-1 bg-white rounded" enctype="multipart/form-data">
                 @csrf
                 <div class="input-group">
-                    <textarea class="form-control" id="postContentV"
+                    <textarea class="form-control" id="postContent"
                               style="height: 70px; margin-bottom: 10px; resize: none;" name="title"
                               placeholder="What's on your mind..."></textarea>
                     <div class="input-group-append p-3">
@@ -288,14 +290,13 @@
         @foreach($videos as $video)
             <div class="row">
                 <div class="col-lg-7 mx-auto">
-                    <div class="card mb-4 shadow p-3 mb-1 bg-white rounded" style="margin :13px;">
+                    <div class="card mb-4 shadow p-3 mb-1 bg-white rounded" style="margin: 13px;">
                         <div class="media mb-9" style="display: flex; align-items: center;">
 
                             <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
                                  class="d-block ui-w-40 rounded-circle"
                                  height="50px"
-                                 alt="" style="margin-left:15px;" style="flex-shrink: 0;">
-
+                                 alt="" style="margin-left:15px; flex-shrink: 0;">
 
                             <div class="media-body ml-3">
                                 <h6 style="margin-left:15px;"> {{ $video->user->name }}</h6>
@@ -303,28 +304,32 @@
                                     <h7>{{ $video->created_at->diffForHumans() }}</h7>
                                 </div>
                             </div>
+
                             @auth
-                                <div class="nav-item dropdown"
-                                     style="margin-left: auto; border-radius: 5px; padding: 5px;">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                                       data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-h"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-left"
-                                         style="background-color: #ffffff; color: #000000;"
-                                         aria-labelledby="navbarDropdown">
-
-                                        <a class="dropdown-item"
-                                           href="{{ route('videos.delete', ['id' => $video->id]) }}"><i
-                                                class="fas fa-trash-alt"></i> Delete</a>
-                                        <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                           data-bs-target="#editTitleModal-{{ $video->id }}"><i class="fas fa-edit"></i>
-                                            Edit</a>
-
+                                @if (auth()->user()->id === $video->user_id)
+                                    <div class="nav-item dropdown"
+                                         style="margin-left: auto; border-radius: 5px; padding: 5px;">
+                                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                                           data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-h"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-left"
+                                             style="background-color: #ffffff; color: #000000;"
+                                             aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item"
+                                               href="{{ route('videos.delete', ['id' => $video->id]) }}">
+                                                <i class="fas fa-trash-alt"></i> Delete
+                                            </a>
+                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                               data-bs-target="#editTitleModal-{{ $video->id }}">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             @endauth
                         </div>
+
                         <p style="margin-left:15px;">{{ $video->title }}</p>
 
                         <div class="ratio ratio-16x9" style="background-color: black">
@@ -335,7 +340,6 @@
                         <div class="card-body">
                             <!-- Add any additional content related to the video here -->
                         </div>
-
 
                         <div>
                             @auth
@@ -349,51 +353,51 @@
                                 @else
                                     <form action="{{ route('videos.like', $video->id) }}" method="POST">
                                         @csrf
-
                                         <button type="submit" class="like-btn">
                                             <i class="fas fa-thumbs-up"></i>
                                         </button>
                                     </form>
                                 @endif
                             @endauth
-
                             <span id="like-count">{{ $video->likes()->count() }}</span> likes
                         </div>
-
                     </div>
                 </div>
             </div>
 
             <!-- Edit Title Modal -->
-            <div class="modal fade" id="editTitleModal-{{ $video->id }}" tabindex="-1"
-                 aria-labelledby="editTitleModalLabel-{{ $video->id }}" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editTitleModalLabel-{{ $video->id }}">Edit Title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ route('videos.updateTitle', $video->id) }}" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <div class="mb-3">
-                                    <label for="title-{{ $video->id }}" class="form-label">Title</label>
-
-                                    <textarea type="text" class="form-control" id="title-{{ $video->id }}" name="title"
-                                    >{{ $video->title }}</textarea>
-
-                                    <video src="{{ asset('storage/' . $video->video_path) }}" class="img-fluid"
-                                           style="width: 100%;margin-top: 10px"
-                                           height="600px" controls
-                                           autoplay loop alt="Video"></video>
+            @auth
+                @if (auth()->user()->id === $video->user_id)
+                    <div class="modal fade" id="editTitleModal-{{ $video->id }}" tabindex="-1"
+                         aria-labelledby="editTitleModalLabel-{{ $video->id }}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editTitleModalLabel-{{ $video->id }}">Edit Title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                            </form>
+                                <div class="modal-body">
+                                    <form action="{{ route('videos.updateTitle', $video->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="mb-3">
+                                            <label for="title-{{ $video->id }}" class="form-label">Title</label>
+                                            <textarea class="form-control" id="title-{{ $video->id }}"
+                                                      name="title">{{ $video->title }}</textarea>
+                                            <video src="{{ asset('storage/' . $video->video_path) }}" class="img-fluid"
+                                                   style="width: 100%; margin-top: 10px"
+                                                   height="600px" controls autoplay loop alt="Video"></video>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                @endif
+            @endauth
+
         @endforeach
     @endif
 
@@ -428,6 +432,57 @@
         var videos = document.querySelectorAll("video");
         videos.forEach(function (video) {
             video.autoplay = false;
+        });
+    });
+
+
+    const tribute = new Tribute({
+        trigger: '@',
+        values: function (text, cb) {
+            fetch('/api/users?query=' + text)
+                .then(res => res.json())
+                .then(data => cb(data.map(user => ({
+                    key: user.name,
+                    value: user.name
+                }))));
+        },
+        selectTemplate: function (item) {
+            return '@' + item.original.value;
+        },
+        menuItemLimit: 10
+    });
+
+    tribute.attach(document.getElementById('postContent'));
+
+    function synchronizeHighlighting(textarea) {
+        const text = textarea.value;
+        const highlightedContent = text.replace(/(@\w+)/g, '<span style="background-color: #ffff00;">$1</span>');
+        document.getElementById('highlightedContent').innerHTML = highlightedContent.replace(/\n/g, '<br>');
+    }
+
+    document.getElementById('postContent').addEventListener('input', function () {
+        synchronizeHighlighting(this);
+    });
+
+    document.getElementById('postContent').addEventListener('tribute-replaced', function (e) {
+        synchronizeHighlighting(this);
+    });
+
+    // Initial synchronization
+    synchronizeHighlighting(document.getElementById('postContent'));
+
+    document.getElementById('postContent').addEventListener('input', function () {
+        this.innerHTML = this.value;
+    });
+
+    document.getElementById('postContent').addEventListener('input', function () {
+        const spans = this.querySelectorAll('span');
+        spans.forEach(span => {
+            const parent = span.parentNode;
+            while (span.firstChild) {
+                parent.insertBefore(span.firstChild, span);
+            }
+            parent.removeChild(span);
         });
     });
 

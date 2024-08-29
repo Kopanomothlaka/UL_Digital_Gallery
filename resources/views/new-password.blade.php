@@ -46,11 +46,11 @@
                                            class="form-control rounded-pill my-1 py-2 custom-input"/>
 
                                     <label for="username">Enter new password</label>
-                                    <input type="email" name="password" id=""
+                                    <input type="password" name="password" id=""
                                            class="form-control rounded-pill my-1 py-2 custom-input"/>
 
                                     <label for="username">Confirm Password</label>
-                                    <input type="email" name="password_confirmation" id=""
+                                    <input type="password" name="password_confirmation" id=""
                                            class="form-control rounded-pill my-1 py-2 custom-input"/>
 
 
