@@ -37,8 +37,16 @@ class NewsController extends Controller
         $news->title = $request->title;
 
         if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('photos', 'public');
-            $news->photo = $path;
+            $file = $request->file('photo');
+
+            // Generate a unique filename based on the current timestamp and file extension
+            $imagePath = time() . '.' . $file->extension();
+
+            // Move the file to the 'photos' directory within the 'public' folder
+            $file->move(public_path('photos'), $imagePath);
+
+            // Store the path of the uploaded file in the database
+            $news->photo = $imagePath;
         }
 
         $news->body = $request->body;

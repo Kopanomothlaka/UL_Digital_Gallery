@@ -47,6 +47,8 @@
         <a href="{{ route('admin.posts.pending') }}">
             Pending Posts
         </a>
+
+
         <div class="row">
             @foreach($posts as $post)
                 <div class="col-sm-6">
@@ -55,7 +57,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{$post->text}}</h5>
                             @if($post->image_path)
-                                <img src="{{ asset('storage/' . $post->image_path) }}" alt="Image" width="500"
+                                <img src="{{ asset('/image/' . $post->image_path) }}" alt="Image" width="500"
                                      height="500">
 
                             @endif

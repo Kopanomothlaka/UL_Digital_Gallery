@@ -56,7 +56,7 @@
                             <div class="news">
                                 @if($single_news->photo)
                                     <img class="card-img-top" height="500px" width="500px"
-                                         src="{{ asset('storage/' . $single_news->photo) }}"
+                                         src="{{ asset('/photos/' . $single_news->photo) }}"
                                          alt="Card image cap">
                                 @else
                                     <img class="card-img-top" src="{{ asset('/img/default_image.jpg') }}"

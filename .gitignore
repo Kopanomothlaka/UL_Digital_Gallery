@@ -6,7 +6,9 @@
 /storage/*.key
 /vendor
 /public/video
-/public/images
+/public/image
+/public/photos
+
 
 
 .env.production

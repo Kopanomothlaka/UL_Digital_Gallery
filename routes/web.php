@@ -49,6 +49,9 @@ Route::get('/news', function () {
 Route::get('/news', function () {
     return view('news');
 });
+Route::get('/pic', function () {
+    return view('pic');
+});
 
 
 Route::get('/2020-2024', function () {

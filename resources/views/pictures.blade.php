@@ -372,7 +372,7 @@
                             </div>
 
                             <p style="margin-left:15px;margin-top:19px;"> {{ $post->text }}</p>
-                            <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid"
+                            <img src="{{ asset('/image/' . $post->image_path) }}" class="img-fluid"
                                  style="width: 100%;" height="600px" alt="">
 
                             <div class="card-body"></div>
@@ -423,7 +423,7 @@
                                                 <textarea type="text" class="form-control" id="caption-{{ $post->id }}"
                                                           name="caption">{{ $post->text }}</textarea>
 
-                                                <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid"
+                                                <img src="{{ asset('/image/' . $post->image_path) }}" class="img-fluid"
                                                      style="width: 100%; margin-top: 10px" height="600px" alt="">
                                             </div>
                                             <button type="submit" class="btn btn-primary">Save changes</button>

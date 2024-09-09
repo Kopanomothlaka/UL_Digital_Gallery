@@ -22,8 +22,10 @@ class TimelineController extends Controller
             'image' => 'required|image|max:50000', // Adjust max file size as needed
         ]);
 
+        $imagePath = time() . '.' . $request->file('image')->extension();
 
-        $imagePath = $request->file('image')->store('images', 'public');
+        $request->file('image')->move(public_path('image'), $imagePath);
+
 
         $post = new Post;
         $post->user_id = auth()->id();
