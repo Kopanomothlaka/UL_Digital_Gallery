@@ -333,7 +333,7 @@
                         <p style="margin-left:15px;">{{ $video->title }}</p>
 
                         <div class="ratio ratio-16x9" style="background-color: black">
-                            <video src="{{ asset('storage/' . $video->video_path) }}" title="video" autoplay loop
+                            <video src="{{ asset('/video/' . $video->video_path) }}" title="video" autoplay loop
                                    controls></video>
                         </div>
 
@@ -385,7 +385,7 @@
                                             <label for="title-{{ $video->id }}" class="form-label">Title</label>
                                             <textarea class="form-control" id="title-{{ $video->id }}"
                                                       name="title">{{ $video->title }}</textarea>
-                                            <video src="{{ asset('storage/' . $video->video_path) }}" class="img-fluid"
+                                            <video src="{{ asset('/video/' . $video->video_path) }}" class="img-fluid"
                                                    style="width: 100%; margin-top: 10px"
                                                    height="600px" controls autoplay loop alt="Video"></video>
                                         </div>
