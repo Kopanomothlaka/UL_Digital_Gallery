@@ -23,7 +23,10 @@ class VideoController extends Controller
             'video' => 'required|mimes:mp4,mov,avi,wmv|max:999999999999', // Adjust max file size as needed
         ]);
 
-        $videoPath = $request->file('video')->store('videos', 'public');
+        //$videoPath = $request->file('video')->store('videos', 'public');
+        $videoPath = time().'.'.$request->file('video')->extension();  
+        
+        $request->file('video')->move(public_path('video'), $videoPath);
 
         $video = new Video;
         $video->user_id = auth()->id();

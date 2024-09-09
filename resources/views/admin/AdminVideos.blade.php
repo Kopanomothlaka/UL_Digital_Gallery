@@ -76,7 +76,7 @@
                             <td>{{ $video->user->email }}</td>
                             <td>{{ $video->title }}</td>
                             <td>
-                                <video src="{{ asset('storage/' . $video->video_path) }}" class="img-fluid"
+                                <video src="{{ asset('/video/' . $video->video_path) }}" class="img-fluid"
                                        width="150px" height="100px"
                                        controls
                                        autoplay loop alt="Video"></video>
